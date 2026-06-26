@@ -59,6 +59,27 @@ export const Colors: Story = {
           ))}
         </div>
       </Section>
+      <Section title="Status, Gold & Dark">
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+          <Swatch varName="--color-status-warning" name="Warning / Gold" />
+          <Swatch varName="--color-status-danger" name="Danger" />
+          <Swatch varName="--color-bg-dark" name="Dark surface" />
+          <Swatch varName="--color-bg-active" name="Active (mint)" />
+        </div>
+      </Section>
+    </div>
+  ),
+};
+
+export const Elevation: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-8">
+      {(["sm", "md", "lg"] as const).map((s) => (
+        <div key={s} className="flex flex-col items-center gap-3">
+          <div className={`size-28 bg-panel border border-hairline shadow-${s}`} />
+          <span className="font-eyebrow text-xs uppercase tracking-wide text-muted">shadow-{s}</span>
+        </div>
+      ))}
     </div>
   ),
 };
@@ -66,7 +87,7 @@ export const Colors: Story = {
 export const Typography: Story = {
   render: () => (
     <div className="flex flex-col gap-8">
-      <Eyebrow as="div">Type ramp · Geist / Geist Mono</Eyebrow>
+      <Eyebrow as="div">Type ramp · Archivo / Space Mono</Eyebrow>
       <div className="flex flex-col gap-6">
         {(["6xl", "5xl", "4xl", "3xl", "2xl", "xl", "lg", "base", "sm", "xs"] as const).map((s) => (
           <div key={s} className="flex items-baseline gap-6 border-b border-hairline pb-4">

@@ -12,7 +12,10 @@
     "./theme.css": "./src/styles/theme.css",
     "./tokens.css": "./src/styles/tokens.css"
   },
-  "files": ["src", "tokens"],
+  "files": [
+    "src",
+    "tokens"
+  ],
   "scripts": {
     "tokens:build": "style-dictionary build --config style-dictionary.config.mjs",
     "prestorybook": "pnpm tokens:build",
@@ -29,8 +32,10 @@
     "tailwind-variants": "^0.3.1"
   },
   "devDependencies": {
+    "@fontsource-variable/archivo": "^5.2.8",
     "@fontsource-variable/geist": "^5.1.0",
     "@fontsource-variable/geist-mono": "^5.1.0",
+    "@fontsource/space-mono": "^5.2.9",
     "@storybook/addon-a11y": "^8.5.0",
     "@storybook/addon-essentials": "^8.5.0",
     "@storybook/blocks": "^8.5.0",

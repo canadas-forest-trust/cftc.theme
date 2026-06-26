@@ -43,10 +43,15 @@ import "cftc.theme/theme.css";          // tokens + Tailwind + fonts, once
 import { Button, Stat, TopBar } from "cftc.theme";
 ```
 
+Fonts: **Archivo** (display/UI) + **Space Mono** (eyebrow labels & data), self-hosted
+via `@fontsource`. Aligned to the Campaign Page Customizer POC.
+
 ## Components
 
-`Eyebrow` · `Display` · `Heading` · `Text` · `Button` · `Input` · `OtpInput` ·
-`Panel` · `Stat` · `ProgressBar` · `Divider` · `Badge` · `TopBar`
+**Typography** — `Eyebrow` · `Display` · `Heading` · `Text`
+**Forms** — `Button` · `Input` (underline/box + error) · `Textarea` · `Select` · `Checkbox` · `Switch` · `OtpInput` · `CopyField`
+**Layout & feedback** — `Panel` · `Divider` · `SectionHeader` · `StatStrip` · `Alert` · `Modal` · `SegmentedControl` · `Pagination` · `Accordion` · `TopBar` · `Footer`
+**Data & media** — `Stat` · `ProgressBar` · `DataList` · `DistributionBar` · `Legend` · `Badge` · `Ribbon` · `MediaCard` · `ArticleCard` · `Avatar`
 
-Each ships a `tailwind-variants` recipe (exported alongside the component) so variants
+Most ship a `tailwind-variants` recipe (exported alongside the component) so variants
 are typed and composable. See the Storybook for every variant and state.

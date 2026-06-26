@@ -1,16 +1,17 @@
 @import "tailwindcss";
 
-/* Self-hosted fonts (no runtime network). Families: "Geist Variable" / "Geist Mono Variable". */
-@import "@fontsource-variable/geist";
-@import "@fontsource-variable/geist-mono";
+/* Self-hosted fonts (no runtime network). Archivo = display/UI, Space Mono = labels/data. */
+@import "@fontsource-variable/archivo";
+@import "@fontsource/space-mono/400.css";
+@import "@fontsource/space-mono/700.css";
 
 /* Generated design tokens (DTCG JSON -> Style Dictionary). Do not edit by hand. */
 @import "./tokens.css";
 
-/* Resolve the next/font-style handles the token families point at. */
+/* Resolve the font handles the token families point at. */
 :root {
-  --font-sans: "Geist Variable";
-  --font-mono: "Geist Mono Variable";
+  --font-sans: "Archivo Variable";
+  --font-mono: "Space Mono";
 }
 
 /*
@@ -24,6 +25,8 @@
   --color-frame: var(--color-bg-frame);
   --color-panel: var(--color-bg-panel);
   --color-inset: var(--color-bg-inset);
+  --color-active: var(--color-bg-active);
+  --color-dark: var(--color-bg-dark);
 
   /* Ink / text */
   --color-ink: var(--color-text-primary);
@@ -37,10 +40,22 @@
   --color-accent-strong: var(--color-accent-strong);
   --color-accent-fg: var(--color-accent-fg);
 
-  /* Lines / status */
+  /* Lines */
   --color-hairline: var(--color-border-hairline);
+  --color-field: var(--color-border-field);
   --color-line-strong: var(--color-border-strong);
+
+  /* Status */
   --color-success: var(--color-status-success);
+  --color-warning: var(--color-status-warning);
+  --color-warning-bg: var(--color-status-warning-bg);
+  --color-danger: var(--color-status-danger);
+  --color-gold: var(--color-status-gold);
+
+  /* Elevation -> shadow-sm/md/lg */
+  --shadow-sm: var(--elevation-sm);
+  --shadow-md: var(--elevation-md);
+  --shadow-lg: var(--elevation-lg);
 
   /* Font families -> font-display / font-body / font-eyebrow */
   --font-display: var(--font-role-display);
