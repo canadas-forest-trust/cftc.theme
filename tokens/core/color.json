@@ -1,0 +1,34 @@
+{
+  "color": {
+    "$type": "color",
+    "paper": {
+      "50": { "$value": "#FCFBF7" },
+      "100": { "$value": "#F8F5ED" },
+      "200": { "$value": "#F4F1E8" },
+      "300": { "$value": "#ECE7DA" },
+      "400": { "$value": "#E2DCCC" }
+    },
+    "ink": {
+      "900": { "$value": "#17150F" },
+      "800": { "$value": "#221F18" },
+      "700": { "$value": "#3A362C" },
+      "600": { "$value": "#565143" },
+      "500": { "$value": "#6E6857" },
+      "400": { "$value": "#928B78" }
+    },
+    "green": {
+      "900": { "$value": "#15311F" },
+      "800": { "$value": "#1C4429" },
+      "700": { "$value": "#2C6A43" },
+      "600": { "$value": "#2E8B57" },
+      "500": { "$value": "#34A06B" },
+      "400": { "$value": "#6FBE93" }
+    },
+    "warm": {
+      "hairline": { "$value": "#DED8C9" },
+      "strong": { "$value": "#C6BFAC" }
+    },
+    "white": { "$value": "#FFFFFF" },
+    "black": { "$value": "#100F0C" }
+  }
+}

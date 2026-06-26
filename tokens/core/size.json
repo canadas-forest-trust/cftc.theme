@@ -1,0 +1,13 @@
+{
+  "radius": {
+    "$type": "dimension",
+    "none": { "$value": "0rem" },
+    "xs": { "$value": "0.125rem" },
+    "sm": { "$value": "0.25rem" },
+    "full": { "$value": "9999px" }
+  },
+  "container": {
+    "$type": "dimension",
+    "page": { "$value": "72rem" }
+  }
+}

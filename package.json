@@ -1,0 +1,54 @@
+{
+  "name": "cftc.theme",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Canada's Forest Trust — design tokens & component base (editorial/Swiss-minimal). Source of truth for the partner portal and staff admin.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Canada's Forest Trust",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./theme.css": "./src/styles/theme.css",
+    "./tokens.css": "./src/styles/tokens.css"
+  },
+  "files": ["src", "tokens"],
+  "scripts": {
+    "tokens:build": "style-dictionary build --config style-dictionary.config.mjs",
+    "prestorybook": "pnpm tokens:build",
+    "storybook": "storybook dev -p 6006",
+    "prebuild-storybook": "pnpm tokens:build",
+    "build-storybook": "storybook build -o storybook-static",
+    "lint": "eslint ."
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "dependencies": {
+    "tailwind-variants": "^0.3.1"
+  },
+  "devDependencies": {
+    "@fontsource-variable/geist": "^5.1.0",
+    "@fontsource-variable/geist-mono": "^5.1.0",
+    "@storybook/addon-a11y": "^8.5.0",
+    "@storybook/addon-essentials": "^8.5.0",
+    "@storybook/blocks": "^8.5.0",
+    "@storybook/react": "^8.5.0",
+    "@storybook/react-vite": "^8.5.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "storybook": "^8.5.0",
+    "style-dictionary": "^4.3.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

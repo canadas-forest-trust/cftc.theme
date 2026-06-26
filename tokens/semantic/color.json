@@ -1,0 +1,32 @@
+{
+  "color": {
+    "$type": "color",
+    "bg": {
+      "canvas": { "$value": "{color.paper.200}" },
+      "frame": { "$value": "{color.paper.300}" },
+      "panel": { "$value": "{color.paper.50}" },
+      "inset": { "$value": "{color.paper.100}" }
+    },
+    "text": {
+      "primary": { "$value": "{color.ink.900}" },
+      "secondary": { "$value": "{color.ink.700}" },
+      "muted": { "$value": "{color.ink.500}" },
+      "inverse": { "$value": "{color.paper.50}" },
+      "accent": { "$value": "{color.green.700}" }
+    },
+    "accent": {
+      "default": { "$value": "{color.green.700}" },
+      "bright": { "$value": "{color.green.500}" },
+      "strong": { "$value": "{color.green.800}" },
+      "fg": { "$value": "{color.paper.50}" }
+    },
+    "border": {
+      "hairline": { "$value": "{color.warm.hairline}" },
+      "strong": { "$value": "{color.warm.strong}" },
+      "accent": { "$value": "{color.green.700}" }
+    },
+    "status": {
+      "success": { "$value": "{color.green.600}" }
+    }
+  }
+}

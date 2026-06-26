@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+/* Self-hosted fonts (no runtime network). Families: "Geist Variable" / "Geist Mono Variable". */
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
+
+/* Generated design tokens (DTCG JSON -> Style Dictionary). Do not edit by hand. */
+@import "./tokens.css";
+
+/* Resolve the next/font-style handles the token families point at. */
+:root {
+  --font-sans: "Geist Variable";
+  --font-mono: "Geist Mono Variable";
+}
+
+/*
+ * Bind Tailwind's theme to the generated token vars. `inline` means utilities
+ * reference the token var directly, so changing a token in JSON -> CSS instantly
+ * re-themes every component. No hand-written component CSS anywhere.
+ */
+@theme inline {
+  /* Surfaces */
+  --color-canvas: var(--color-bg-canvas);
+  --color-frame: var(--color-bg-frame);
+  --color-panel: var(--color-bg-panel);
+  --color-inset: var(--color-bg-inset);
+
+  /* Ink / text */
+  --color-ink: var(--color-text-primary);
+  --color-ink-soft: var(--color-text-secondary);
+  --color-muted: var(--color-text-muted);
+  --color-inverse: var(--color-text-inverse);
+
+  /* Accent */
+  --color-accent: var(--color-accent-default);
+  --color-accent-bright: var(--color-accent-bright);
+  --color-accent-strong: var(--color-accent-strong);
+  --color-accent-fg: var(--color-accent-fg);
+
+  /* Lines / status */
+  --color-hairline: var(--color-border-hairline);
+  --color-line-strong: var(--color-border-strong);
+  --color-success: var(--color-status-success);
+
+  /* Font families -> font-display / font-body / font-eyebrow */
+  --font-display: var(--font-role-display);
+  --font-body: var(--font-role-body);
+  --font-eyebrow: var(--font-role-eyebrow);
+
+  /* Type scale -> text-xs ... text-6xl */
+  --text-xs: var(--font-size-xs);
+  --text-sm: var(--font-size-sm);
+  --text-base: var(--font-size-base);
+  --text-lg: var(--font-size-lg);
+  --text-xl: var(--font-size-xl);
+  --text-2xl: var(--font-size-2xl);
+  --text-3xl: var(--font-size-3xl);
+  --text-4xl: var(--font-size-4xl);
+  --text-5xl: var(--font-size-5xl);
+  --text-6xl: var(--font-size-6xl);
+
+  /* Line-height -> leading-* */
+  --leading-none: var(--font-leading-none);
+  --leading-tight: var(--font-leading-tight);
+  --leading-snug: var(--font-leading-snug);
+  --leading-normal: var(--font-leading-normal);
+  --leading-relaxed: var(--font-leading-relaxed);
+
+  /* Letter-spacing -> tracking-* */
+  --tracking-tight: var(--font-tracking-tight);
+  --tracking-normal: var(--font-tracking-normal);
+  --tracking-wide: var(--font-tracking-wide);
+  --tracking-wider: var(--font-tracking-wider);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bg-canvas);
+    color: var(--color-text-primary);
+    font-family: var(--font-role-body);
+    -webkit-font-smoothing: antialiased;
+  }
+}

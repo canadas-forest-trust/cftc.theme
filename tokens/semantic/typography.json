@@ -1,0 +1,9 @@
+{
+  "font": {
+    "role": {
+      "display": { "$type": "fontFamily", "$value": "{font.family.sans}" },
+      "body": { "$type": "fontFamily", "$value": "{font.family.sans}" },
+      "eyebrow": { "$type": "fontFamily", "$value": "{font.family.mono}" }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+# dependencies
+node_modules/
+
+# generated design tokens (built from tokens/*.json via style-dictionary)
+src/styles/tokens.css
+
+# build output
+storybook-static/
+
+# misc
+.DS_Store
+*.log
+*.tsbuildinfo
