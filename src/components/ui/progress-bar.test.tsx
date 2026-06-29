@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import { axe } from 'vitest-axe'
 import { describe, it, expect } from 'vitest'
 import { ProgressBar } from './progress-bar'
 
@@ -48,5 +49,10 @@ describe('ProgressBar', () => {
     expect(screen.getByRole('progressbar')).toBeInTheDocument()
     rerender(<ProgressBar value={50} tone="soft" />)
     expect(screen.getByRole('progressbar')).toBeInTheDocument()
+  })
+
+  it('has no a11y violations', async () => {
+    const { container } = render(<ProgressBar value={60} label="Forest coverage" />)
+    expect(await axe(container)).toHaveNoViolations()
   })
 })

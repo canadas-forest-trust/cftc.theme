@@ -15,15 +15,17 @@ const fill = tv({
 export interface ProgressBarProps extends VariantProps<typeof fill> {
   /** 0–100. */
   value: number;
-  /** Optional label rendered as an eyebrow above the track. */
+  /** Label rendered as an eyebrow above the track and used as the progressbar's accessible name. */
   label?: string;
   /** Optional right-aligned value label, e.g. "4,500". */
   valueLabel?: string;
+  /** Accessible name when no visible label is rendered. */
+  "aria-label"?: string;
   className?: string;
 }
 
 /** ProgressBar — thin track + token-colored fill, optional eyebrow label row. */
-export function ProgressBar({ value, tone, label, valueLabel, className }: ProgressBarProps) {
+export function ProgressBar({ value, tone, label, valueLabel, className, "aria-label": ariaLabel }: ProgressBarProps) {
   const pct = Math.max(0, Math.min(100, value));
   return (
     <div className={className}>
@@ -36,6 +38,7 @@ export function ProgressBar({ value, tone, label, valueLabel, className }: Progr
       <div
         className="h-1.5 w-full bg-frame"
         role="progressbar"
+        aria-label={label ?? ariaLabel}
         aria-valuenow={pct}
         aria-valuemin={0}
         aria-valuemax={100}
