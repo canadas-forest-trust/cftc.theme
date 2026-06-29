@@ -38,10 +38,19 @@ pnpm build-storybook  # static handoff site -> storybook-static/
 
 ## Consume from an app
 
+Published to **GitHub Packages** as `@canadas-forest-trust/theme` (requires a
+`.npmrc` pointing the scope at `npm.pkg.github.com` with a token that has
+`read:packages`). In a Tailwind v4 app:
+
 ```ts
-import "cftc.theme/theme.css";          // tokens + Tailwind + fonts, once
-import { Button, Stat, TopBar } from "cftc.theme";
+import "@canadas-forest-trust/theme/theme.css";   // tokens + Tailwind + fonts, once
+import { Button, Stat, TopBar } from "@canadas-forest-trust/theme";
 ```
+
+The consuming app must let Tailwind scan the package so component utilities are
+generated — add to its CSS: `@source "../node_modules/@canadas-forest-trust/theme/src";`
+and `@source` the package via `transpilePackages: ["@canadas-forest-trust/theme"]`
+in `next.config`.
 
 Fonts: **Archivo** (display/UI) + **Space Mono** (eyebrow labels & data), self-hosted
 via `@fontsource`. Aligned to the Campaign Page Customizer POC.

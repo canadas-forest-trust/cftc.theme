@@ -1,11 +1,20 @@
 {
-  "name": "cftc.theme",
+  "name": "@canadas-forest-trust/theme",
   "version": "0.1.0",
-  "private": true,
   "description": "Canada's Forest Trust — design tokens & component base (editorial/Swiss-minimal). Source of truth for the partner portal and staff admin.",
   "type": "module",
   "license": "MIT",
   "author": "Canada's Forest Trust",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/canadas-forest-trust/cftc.theme.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "sideEffects": [
+    "*.css"
+  ],
   "main": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts",
@@ -22,20 +31,20 @@
     "storybook": "storybook dev -p 6006",
     "prebuild-storybook": "pnpm tokens:build",
     "build-storybook": "storybook build -o storybook-static",
+    "prepack": "pnpm tokens:build",
     "lint": "eslint ."
   },
   "peerDependencies": {
     "react": ">=18",
-    "react-dom": ">=18"
+    "react-dom": ">=18",
+    "tailwindcss": ">=4"
   },
   "dependencies": {
+    "@fontsource-variable/archivo": "^5.2.8",
+    "@fontsource/space-mono": "^5.2.9",
     "tailwind-variants": "^0.3.1"
   },
   "devDependencies": {
-    "@fontsource-variable/archivo": "^5.2.8",
-    "@fontsource-variable/geist": "^5.1.0",
-    "@fontsource-variable/geist-mono": "^5.1.0",
-    "@fontsource/space-mono": "^5.2.9",
     "@storybook/addon-a11y": "^8.5.0",
     "@storybook/addon-essentials": "^8.5.0",
     "@storybook/blocks": "^8.5.0",
