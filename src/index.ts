@@ -49,6 +49,7 @@ export { Badge, badge, type BadgeProps } from "./components/ui/badge";
 export { Ribbon, ribbon, type RibbonProps } from "./components/ui/ribbon";
 export { MediaCard, type MediaCardProps } from "./components/ui/media-card";
 export { ArticleCard, type ArticleCardProps } from "./components/ui/article-card";
+export { SdgCard, type SdgCardProps } from "./components/ui/sdg-card";
 export { Avatar, avatar, type AvatarProps } from "./components/ui/avatar";
 
 export { cn } from "./lib/cn";
