@@ -52,6 +52,7 @@ export { ArticleCard, type ArticleCardProps } from "./components/ui/article-card
 export { SdgCard, type SdgCardProps } from "./components/ui/sdg-card";
 export { QuizCard, type QuizCardProps, type QuizAnswer } from "./components/ui/quiz-card";
 export { CategoryCard, type CategoryCardProps } from "./components/ui/category-card";
+export { SpeciesGrid, type SpeciesGridProps, type SpeciesDatum } from "./components/ui/species-grid";
 export { Avatar, avatar, type AvatarProps } from "./components/ui/avatar";
 
 export { cn } from "./lib/cn";
