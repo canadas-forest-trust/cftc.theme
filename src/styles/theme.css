@@ -95,4 +95,17 @@
     font-family: var(--font-role-body);
     -webkit-font-smoothing: antialiased;
   }
+
+  :is(
+    a[href],
+    button:not(:disabled),
+    [role="button"]:not([aria-disabled="true"]),
+    [role="tab"],
+    [role="switch"]:not(:disabled),
+    summary,
+    label:has(input[type="checkbox"]:not(:disabled)),
+    label:has(input[type="radio"]:not(:disabled))
+  ) {
+    cursor: pointer;
+  }
 }

@@ -24,7 +24,7 @@ export function DataList({ columns, rows, onRowClick, className }: DataListProps
   return (
     <div className={className}>
       <div
-        className="grid items-center gap-4 border-b border-hairline pb-2"
+        className="grid items-center gap-4 border-b border-hairline px-3 pb-2"
         style={{ gridTemplateColumns: gridCols }}
       >
         {columns.map((c) => (
@@ -40,10 +40,11 @@ export function DataList({ columns, rows, onRowClick, className }: DataListProps
         return (
           <Tag
             key={i}
+            data-list-row=""
             {...(onRowClick ? { type: "button", onClick: () => onRowClick(i) } : {})}
             className={[
-              "grid w-full items-center gap-4 border-b border-hairline py-3 text-left font-body text-base text-ink",
-              onRowClick ? "transition-colors hover:bg-inset" : "",
+              "grid w-full items-center gap-4 border-b border-hairline px-3 py-3 text-left font-body text-base text-ink",
+              onRowClick ? "cursor-pointer rounded-none transition-colors hover:bg-inset" : "",
             ].join(" ")}
             style={{ gridTemplateColumns: gridCols }}
           >

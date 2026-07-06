@@ -1,0 +1,9 @@
+{
+  "radius": {
+    "$type": "dimension",
+    "sm": { "$value": "0.375rem" },
+    "md": { "$value": "0.5rem" },
+    "lg": { "$value": "0.75rem" },
+    "full": { "$value": "9999px" }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "@canadas-forest-trust/theme",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Canada's Forest Trust — design tokens & component base (editorial/Swiss-minimal). Source of truth for the partner portal and staff admin.",
   "type": "module",
   "license": "MIT",
@@ -19,14 +19,16 @@
   "exports": {
     ".": "./src/index.ts",
     "./theme.css": "./src/styles/theme.css",
-    "./tokens.css": "./src/styles/tokens.css"
+    "./admin.css": "./src/styles/admin.theme.css",
+    "./tokens.css": "./src/styles/tokens.css",
+    "./admin.tokens.css": "./src/styles/admin.tokens.css"
   },
   "files": [
     "src",
     "tokens"
   ],
   "scripts": {
-    "tokens:build": "style-dictionary build --config style-dictionary.config.mjs",
+    "tokens:build": "node scripts/build-tokens.mjs",
     "prestorybook": "pnpm tokens:build",
     "storybook": "storybook dev -p 6006",
     "prebuild-storybook": "pnpm tokens:build",
@@ -42,6 +44,7 @@
   },
   "dependencies": {
     "@fontsource-variable/archivo": "^5.2.8",
+    "@fontsource/ibm-plex-mono": "^5.2.5",
     "@fontsource/space-mono": "^5.2.9",
     "tailwind-variants": "^0.3.1"
   },

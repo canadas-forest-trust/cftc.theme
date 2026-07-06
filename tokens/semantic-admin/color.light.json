@@ -1,0 +1,39 @@
+{
+  "color": {
+    "$type": "color",
+    "bg": {
+      "canvas": { "$value": "{color.paper.100}" },
+      "frame": { "$value": "{color.paper.200}" },
+      "panel": { "$value": "{color.paper.0}" },
+      "inset": { "$value": "{color.paper.50}" },
+      "active": { "$value": "{color.green.100}" },
+      "dark": { "$value": "{color.ink.900}" }
+    },
+    "text": {
+      "primary": { "$value": "{color.ink.900}" },
+      "secondary": { "$value": "{color.ink.700}" },
+      "muted": { "$value": "{color.ink.500}" },
+      "inverse": { "$value": "{color.paper.100}" },
+      "accent": { "$value": "{color.green.700}" }
+    },
+    "accent": {
+      "default": { "$value": "{color.green.700}" },
+      "bright": { "$value": "{color.green.500}" },
+      "strong": { "$value": "{color.green.800}" },
+      "fg": { "$value": "{color.paper.0}" }
+    },
+    "border": {
+      "hairline": { "$value": "{color.warm.hairline}" },
+      "field": { "$value": "{color.warm.field}" },
+      "strong": { "$value": "{color.warm.strong}" },
+      "accent": { "$value": "{color.green.700}" }
+    },
+    "status": {
+      "success": { "$value": "{color.green.600}" },
+      "warning": { "$value": "{color.gold.500}" },
+      "warning-bg": { "$value": "{color.gold.300}" },
+      "danger": { "$value": "{color.red.500}" },
+      "gold": { "$value": "{color.gold.500}" }
+    }
+  }
+}

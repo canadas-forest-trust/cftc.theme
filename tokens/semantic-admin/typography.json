@@ -1,0 +1,18 @@
+{
+  "font": {
+    "role": {
+      "display": { "$type": "fontFamily", "$value": "{font.family.sans}" },
+      "body": { "$type": "fontFamily", "$value": "{font.family.sans}" },
+      "eyebrow": { "$type": "fontFamily", "$value": "{font.family.mono}" }
+    },
+    "size": {
+      "$type": "dimension",
+      "display": { "$value": "3.25rem" },
+      "h1": { "$value": "2.125rem" },
+      "h2": { "$value": "1.625rem" },
+      "h3": { "$value": "1.1875rem" },
+      "body": { "$value": "0.9375rem" },
+      "small": { "$value": "0.8125rem" }
+    }
+  }
+}

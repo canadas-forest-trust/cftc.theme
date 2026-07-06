@@ -1,0 +1,139 @@
+/* Admin preset — imported from globals.css after portal theme.css. All rules scoped to [data-app="admin"]. */
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/600.css";
+
+@import "./admin.tokens.css";
+
+[data-app="admin"] {
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono";
+
+  /*
+   * Re-bind Tailwind theme aliases on the admin shell so utilities (bg-frame,
+   * text-ink, font-body, …) resolve admin semantic tokens — including dark mode.
+   */
+  --color-canvas: var(--color-bg-canvas);
+  --color-frame: var(--color-bg-frame);
+  --color-panel: var(--color-bg-panel);
+  --color-inset: var(--color-bg-inset);
+  --color-active: var(--color-bg-active);
+  --color-dark: var(--color-bg-dark);
+
+  --color-ink: var(--color-text-primary);
+  --color-ink-soft: var(--color-text-secondary);
+  --color-muted: var(--color-text-muted);
+  --color-inverse: var(--color-text-inverse);
+
+  --color-accent: var(--color-accent-default);
+  /* accent-bright, accent-strong, accent-fg: set in admin.tokens.css — do not rebind here (same name = circular) */
+
+  --color-hairline: var(--color-border-hairline);
+  --color-field: var(--color-border-field);
+  --color-line-strong: var(--color-border-strong);
+
+  --color-success: var(--color-status-success);
+  --color-warning: var(--color-status-warning);
+  --color-warning-bg: var(--color-status-warning-bg);
+  --color-danger: var(--color-status-danger);
+  --color-gold: var(--color-status-gold);
+
+  /* Admin uses sans for headings — not oversized grotesque display. */
+  --font-display: var(--font-role-body);
+  --font-body: var(--font-role-body);
+  --font-eyebrow: var(--font-role-eyebrow);
+}
+
+@layer base {
+  [data-app="admin"] {
+    font-family: var(--font-role-body);
+    font-size: var(--font-size-body);
+    color: var(--color-text-primary);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  [data-app="admin"] ::selection {
+    background: var(--color-green-100);
+  }
+}
+
+/*
+ * De-editorialize shared theme components inside admin.
+ * Portal keeps uppercase mono eyebrows + square corners; admin gets interface typography.
+ */
+@layer components {
+  [data-app="admin"] .font-eyebrow {
+    font-family: var(--font-role-body);
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+    font-size: var(--font-size-small);
+    line-height: 1.3;
+  }
+
+  [data-app="admin"] .font-display {
+    font-family: var(--font-role-body);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  [data-app="admin"] .text-4xl.font-display {
+    font-size: var(--font-size-h1);
+  }
+
+  [data-app="admin"] .text-5xl.font-display,
+  [data-app="admin"] .text-6xl.font-display {
+    font-size: var(--font-size-display);
+  }
+
+  [data-app="admin"] button:not([data-list-row]),
+  [data-app="admin"] input:not([type="checkbox"]):not([type="radio"]):not([type="color"]),
+  [data-app="admin"] textarea,
+  [data-app="admin"] select {
+    border-radius: var(--radius-md);
+  }
+
+  [data-app="admin"] [data-list-row] {
+    border-radius: 0;
+  }
+
+  [data-app="admin"] button[data-list-row]:hover {
+    border-radius: 0;
+  }
+
+  [data-app="admin"] .bg-panel.border {
+    border-radius: var(--radius-lg);
+  }
+
+  /* Primary solid buttons — use semantic tokens directly for reliable contrast */
+  [data-app="admin"] button.bg-accent {
+    background-color: var(--color-accent-default);
+    color: var(--color-accent-fg);
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding-inline: 1.125rem;
+    min-height: 2.5rem;
+  }
+
+  [data-app="admin"] button.bg-accent:hover {
+    background-color: var(--color-accent-strong);
+    color: var(--color-accent-fg);
+  }
+
+  /* Link-style actions: sans, normal case */
+  [data-app="admin"] a.font-eyebrow,
+  [data-app="admin"] button.font-eyebrow {
+    font-family: var(--font-role-body);
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+
+  /* Data / IDs keep mono */
+  [data-app="admin"] .admin-data {
+    font-family: var(--font-role-eyebrow);
+    font-size: 0.8125rem;
+  }
+}
