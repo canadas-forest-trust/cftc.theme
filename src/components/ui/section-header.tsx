@@ -1,8 +1,8 @@
-import { Eyebrow } from "./eyebrow";
+import { Label } from "./label";
 import { Display } from "./display";
 
 export interface SectionHeaderProps {
-  /** Monospace eyebrow, e.g. "FOREST LOCATIONS" or "BRAND & PARTNER TOOLKIT". */
+  /** Archivo section label, e.g. "Forest locations" or "Brand & partner toolkit". */
   eyebrow: string;
   /** Optional large display title below the eyebrow (page-level headers). */
   title?: string;
@@ -13,7 +13,7 @@ export interface SectionHeaderProps {
   className?: string;
 }
 
-/** SectionHeader — eyebrow (+ optional display title) with a trailing action. */
+/** SectionHeader — section label (+ optional display title) with a trailing action. */
 export function SectionHeader({ eyebrow, title, action, divider, className }: SectionHeaderProps) {
   return (
     <div
@@ -24,7 +24,9 @@ export function SectionHeader({ eyebrow, title, action, divider, className }: Se
       ].join(" ")}
     >
       <div className="flex min-w-0 flex-col gap-3">
-        <Eyebrow as="div">{eyebrow}</Eyebrow>
+        <Label as="div" kind="section">
+          {eyebrow}
+        </Label>
         {title && (
           <Display as="h2" size="md">
             {title}

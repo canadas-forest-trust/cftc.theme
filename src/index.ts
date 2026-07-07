@@ -4,6 +4,7 @@
 
 // Typography
 export { Eyebrow, eyebrow, type EyebrowProps } from "./components/ui/eyebrow";
+export { Label, label, type LabelProps } from "./components/ui/label";
 export { Display, display, type DisplayProps } from "./components/ui/display";
 export { Heading, heading, type HeadingProps } from "./components/ui/heading";
 export { Text, text, type TextProps } from "./components/ui/text";

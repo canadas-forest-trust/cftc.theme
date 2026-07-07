@@ -5,7 +5,7 @@ import { tv, type VariantProps } from "tailwind-variants";
  * editorial layout (e.g. "STEP 01 / IDENTIFY", "IMPACT STATEMENT · FY2026").
  */
 export const eyebrow = tv({
-  base: "font-eyebrow uppercase tracking-wide text-xs leading-none",
+  base: "font-eyebrow text-xs font-bold uppercase tracking-wider leading-none",
   variants: {
     tone: {
       muted: "text-muted",

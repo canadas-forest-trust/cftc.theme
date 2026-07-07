@@ -5,7 +5,7 @@ import { tv, type VariantProps } from "tailwind-variants";
  * "Sign in" / "My Organization", and hero figures like "6,000" / "809.73").
  */
 export const display = tv({
-  base: "font-display font-medium tracking-tight",
+  base: "font-display font-extrabold tracking-tight",
   variants: {
     size: {
       md: "text-4xl leading-none",

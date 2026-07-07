@@ -37,7 +37,9 @@
       "$type": "dimension",
       "tight": { "$value": "-0.02em" },
       "normal": { "$value": "0em" },
+      "label": { "$value": "0.1em" },
       "wide": { "$value": "0.08em" },
+      "editorial": { "$value": "0.12em" },
       "wider": { "$value": "0.14em" }
     }
   }

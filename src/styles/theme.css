@@ -84,7 +84,9 @@
   /* Letter-spacing -> tracking-* */
   --tracking-tight: var(--font-tracking-tight);
   --tracking-normal: var(--font-tracking-normal);
+  --tracking-label: var(--font-tracking-label);
   --tracking-wide: var(--font-tracking-wide);
+  --tracking-editorial: var(--font-tracking-editorial);
   --tracking-wider: var(--font-tracking-wider);
 }
 
