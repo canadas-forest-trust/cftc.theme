@@ -16,14 +16,14 @@ const ROWS = [
 
 describe('DataList', () => {
   it('renders column headers', () => {
-    render(<DataList columns={COLUMNS} rows={ROWS} />)
+    render(<DataList columns={COLUMNS} rows={ROWS} layout="table" />)
     expect(screen.getByText('Location')).toBeInTheDocument()
     expect(screen.getByText('Trees')).toBeInTheDocument()
     expect(screen.getByText('CO₂')).toBeInTheDocument()
   })
 
   it('renders row data', () => {
-    render(<DataList columns={COLUMNS} rows={ROWS} />)
+    render(<DataList columns={COLUMNS} rows={ROWS} layout="table" />)
     expect(screen.getByText('Boreal Forest')).toBeInTheDocument()
     expect(screen.getByText('1,200')).toBeInTheDocument()
     expect(screen.getByText('Pacific Rainforest')).toBeInTheDocument()
@@ -31,7 +31,7 @@ describe('DataList', () => {
 
   it('renders clickable rows when onRowClick provided', () => {
     const onRowClick = vi.fn()
-    render(<DataList columns={COLUMNS} rows={ROWS} onRowClick={onRowClick} />)
+    render(<DataList columns={COLUMNS} rows={ROWS} onRowClick={onRowClick} layout="table" />)
     const buttons = screen.getAllByRole('button')
     expect(buttons.length).toBeGreaterThan(0)
   })
@@ -39,14 +39,14 @@ describe('DataList', () => {
   it('fires onRowClick with correct index', async () => {
     const user = userEvent.setup()
     const onRowClick = vi.fn()
-    render(<DataList columns={COLUMNS} rows={ROWS} onRowClick={onRowClick} />)
+    render(<DataList columns={COLUMNS} rows={ROWS} onRowClick={onRowClick} layout="table" />)
     const buttons = screen.getAllByRole('button')
     await user.click(buttons[0])
     expect(onRowClick).toHaveBeenCalledWith(0)
   })
 
   it('renders non-interactive rows when no onRowClick', () => {
-    render(<DataList columns={COLUMNS} rows={ROWS} />)
+    render(<DataList columns={COLUMNS} rows={ROWS} layout="table" />)
     // With no onRowClick, rows render as divs (not buttons)
     expect(screen.queryByRole('button')).not.toBeInTheDocument()
   })

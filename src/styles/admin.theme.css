@@ -136,4 +136,21 @@
     font-family: var(--font-role-eyebrow);
     font-size: 0.8125rem;
   }
+
+  /* Mobile card lists — comfortable tap targets */
+  [data-app="admin"] [data-list-card] {
+    min-height: 2.75rem;
+  }
+
+  @media (max-width: 639px) {
+    [data-app="admin"] [role="dialog"][aria-modal="true"] {
+      max-width: calc(100vw - 1rem);
+    }
+
+    [data-app="admin"] [role="dialog"][aria-modal="true"] > div:last-child:has(button) {
+      position: sticky;
+      bottom: 0;
+      background: var(--color-bg-panel);
+    }
+  }
 }

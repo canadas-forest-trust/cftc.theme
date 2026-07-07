@@ -18,12 +18,12 @@ export function SectionHeader({ eyebrow, title, action, divider, className }: Se
   return (
     <div
       className={[
-        "flex flex-wrap items-end justify-between gap-x-6 gap-y-3",
+        "flex flex-col items-stretch gap-y-3 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between sm:gap-x-6",
         divider ? "border-b border-hairline pb-4" : "",
         className ?? "",
       ].join(" ")}
     >
-      <div className="flex flex-col gap-3">
+      <div className="flex min-w-0 flex-col gap-3">
         <Eyebrow as="div">{eyebrow}</Eyebrow>
         {title && (
           <Display as="h2" size="md">
@@ -31,7 +31,7 @@ export function SectionHeader({ eyebrow, title, action, divider, className }: Se
           </Display>
         )}
       </div>
-      {action && <div className="shrink-0">{action}</div>}
+      {action && <div className="w-full shrink-0 sm:w-auto">{action}</div>}
     </div>
   );
 }
