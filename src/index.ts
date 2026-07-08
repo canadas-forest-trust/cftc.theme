@@ -55,5 +55,6 @@ export { QuizCard, type QuizCardProps, type QuizAnswer } from "./components/ui/q
 export { CategoryCard, type CategoryCardProps } from "./components/ui/category-card";
 export { SpeciesGrid, type SpeciesGridProps, type SpeciesDatum } from "./components/ui/species-grid";
 export { Avatar, avatar, type AvatarProps } from "./components/ui/avatar";
+export { Skeleton, type SkeletonProps } from "./components/ui/skeleton";
 
 export { cn } from "./lib/cn";

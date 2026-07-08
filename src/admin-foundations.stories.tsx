@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { Eyebrow } from "./components/ui/eyebrow";
+import { Skeleton } from "./components/ui/skeleton";
 import "../src/styles/admin.theme.css";
 
 const meta: Meta = {
@@ -69,6 +70,26 @@ export const Light: Story = {
 
 export const Dark: Story = {
   render: () => <AdminColorsPanel theme="dark" />,
+};
+
+export const Skeletons: Story = {
+  render: () => (
+    <AdminPreview theme="light">
+      <div className="flex max-w-md flex-col gap-6">
+        <Eyebrow as="div">Admin · Skeleton</Eyebrow>
+        <div className="flex flex-col gap-3" aria-busy="true" aria-label="Loading content">
+          <Skeleton className="h-3 w-24" />
+          <Skeleton className="h-8 w-48" />
+          <Skeleton className="h-10 w-full rounded-md" />
+          <div className="flex gap-4">
+            <Skeleton className="h-12 w-24" />
+            <Skeleton className="h-12 w-24" />
+            <Skeleton className="h-12 w-24" />
+          </div>
+        </div>
+      </div>
+    </AdminPreview>
+  ),
 };
 
 export const ThemeToggle: Story = {
