@@ -50,4 +50,32 @@ describe('DataList', () => {
     // With no onRowClick, rows render as divs (not buttons)
     expect(screen.queryByRole('button')).not.toBeInTheDocument()
   })
+
+  it('truncates long cell text without overlapping adjacent columns', () => {
+    const longTitle =
+      'Complete_with_Docusign - Scouts Canada and CFT (updated April 1 2024).pdf'
+    const { container } = render(
+      <DataList
+        columns={[
+          { key: 'title', label: 'Title' },
+          { key: 'filename', label: 'Filename' },
+          { key: 'size', label: 'Size', align: 'right' },
+          { key: 'actions', label: '' },
+        ]}
+        rows={[
+          {
+            title: longTitle,
+            filename: longTitle,
+            size: '258.8 KB',
+            actions: 'Open',
+          },
+        ]}
+        layout="table"
+      />,
+    )
+
+    const titleCell = container.querySelector('[data-list-row] span')
+    expect(titleCell).toHaveClass('truncate')
+    expect(titleCell).toHaveAttribute('title', longTitle)
+  })
 })

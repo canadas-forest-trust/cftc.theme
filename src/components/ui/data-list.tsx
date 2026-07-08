@@ -4,6 +4,35 @@ export interface DataColumn {
   key: string;
   label: string;
   align?: "left" | "right";
+  /** Keep column width to content (actions, badges). Default: truncate long text. */
+  nowrap?: boolean;
+}
+
+function isActionColumn(column: DataColumn): boolean {
+  return (
+    column.nowrap === true ||
+    column.key === "actions" ||
+    column.key === "action" ||
+    column.label === ""
+  );
+}
+
+function gridColumnWidth(column: DataColumn): string {
+  if (isActionColumn(column)) return "auto";
+  if (column.align === "right") return "minmax(0, max-content)";
+  return "minmax(0, 1fr)";
+}
+
+function cellClassName(column: DataColumn): string {
+  const align = column.align === "right" ? "text-right tabular-nums" : "";
+  if (isActionColumn(column)) {
+    return ["shrink-0 whitespace-nowrap", align].filter(Boolean).join(" ");
+  }
+  return ["min-w-0 truncate", align].filter(Boolean).join(" ");
+}
+
+function cellTitle(value: React.ReactNode): string | undefined {
+  return typeof value === "string" && value.length > 0 ? value : undefined;
 }
 
 export interface DataListProps {
@@ -26,7 +55,7 @@ function DataListTable({
   onRowClick,
   className,
 }: Pick<DataListProps, "columns" | "rows" | "onRowClick" | "className">) {
-  const gridCols = `repeat(${columns.length}, minmax(0, 1fr))${onRowClick ? " 2rem" : ""}`;
+  const gridCols = `${columns.map(gridColumnWidth).join(" ")}${onRowClick ? " 2rem" : ""}`;
 
   return (
     <div className={className}>
@@ -35,7 +64,7 @@ function DataListTable({
         style={{ gridTemplateColumns: gridCols }}
       >
         {columns.map((c) => (
-          <Eyebrow key={c.key} as="div" className={c.align === "right" ? "text-right" : ""}>
+          <Eyebrow key={c.key} as="div" className={cellClassName(c)}>
             {c.label}
           </Eyebrow>
         ))}
@@ -56,7 +85,7 @@ function DataListTable({
             style={{ gridTemplateColumns: gridCols }}
           >
             {columns.map((c) => (
-              <span key={c.key} className={c.align === "right" ? "text-right tabular-nums" : ""}>
+              <span key={c.key} className={cellClassName(c)} title={cellTitle(row[c.key])}>
                 {row[c.key]}
               </span>
             ))}
@@ -103,14 +132,21 @@ function DataListCards({
           >
             <div className="min-w-0 flex-1">
               {primaryKey && (
-                <div className="font-body text-base font-semibold text-ink">{row[primaryKey]}</div>
+                <div
+                  className="truncate font-body text-base font-semibold text-ink"
+                  title={cellTitle(row[primaryKey])}
+                >
+                  {row[primaryKey]}
+                </div>
               )}
               <dl className="mt-1 flex flex-col gap-0.5">
                 {detailKeys.map((key) =>
                   row[key] != null && row[key] !== "" ? (
-                    <div key={key} className="flex flex-wrap gap-x-1.5 text-sm">
-                      <dt className="text-muted">{labelByKey[key]}:</dt>
-                      <dd className="text-ink-soft">{row[key]}</dd>
+                    <div key={key} className="flex min-w-0 gap-x-1.5 text-sm">
+                      <dt className="shrink-0 text-muted">{labelByKey[key]}:</dt>
+                      <dd className="min-w-0 truncate text-ink-soft" title={cellTitle(row[key])}>
+                        {row[key]}
+                      </dd>
                     </div>
                   ) : null,
                 )}
@@ -152,8 +188,8 @@ export function DataList({
 
   return (
     <div className={className}>
-      <div className="hidden md:block">
-        <DataListTable columns={columns} rows={rows} onRowClick={onRowClick} />
+      <div className="hidden min-w-0 md:block">
+        <DataListTable columns={columns} rows={rows} onRowClick={onRowClick} className="min-w-0" />
       </div>
       <div className="md:hidden">
         <DataListCards
