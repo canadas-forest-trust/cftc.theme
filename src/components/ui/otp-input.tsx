@@ -60,7 +60,12 @@ export function OtpInput({
   };
 
   return (
-    <div className="flex gap-2 sm:gap-3" role="group" aria-label={ariaLabel}>
+    <div
+      className="grid w-full max-w-sm gap-1.5 sm:max-w-none sm:gap-2"
+      style={{ gridTemplateColumns: `repeat(${length}, minmax(0, 1fr))` }}
+      role="group"
+      aria-label={ariaLabel}
+    >
       {digits.map((digit, i) => (
         <input
           key={i}
@@ -75,7 +80,7 @@ export function OtpInput({
           onChange={(e) => handleChange(i, e.target.value)}
           onKeyDown={(e) => handleKeyDown(i, e)}
           onPaste={handlePaste}
-          className="size-12 sm:size-14 text-center font-display text-2xl text-ink bg-panel border border-hairline outline-none focus:border-accent focus:border-2 transition-colors"
+          className="aspect-square w-full max-h-14 min-w-0 text-center font-display text-xl text-ink bg-panel border border-hairline outline-none transition-colors focus:border-2 focus:border-accent sm:text-2xl"
         />
       ))}
     </div>
