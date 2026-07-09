@@ -55,12 +55,24 @@ in `next.config`.
 Fonts: **Archivo** (display/UI) + **Space Mono** (eyebrow labels & data), self-hosted
 via `@fontsource`. Aligned to the Campaign Page Customizer POC.
 
+### Admin theme
+
+Staff admin uses a separate preset scoped to `[data-app="admin"]`:
+
+```ts
+import "@canadas-forest-trust/theme/theme.css";   // portal tokens
+import "@canadas-forest-trust/theme/admin.css";    // admin preset (dark, interface typography)
+```
+
+Admin semantic tokens live in `tokens/semantic-admin/` → `src/styles/admin.tokens.css`.
+IBM Plex Mono is used for admin data/labels.
+
 ## Components
 
-**Typography** — `Eyebrow` · `Display` · `Heading` · `Text`
+**Typography** — `Eyebrow` · `Label` · `Display` · `Heading` · `Text`
 **Forms** — `Button` · `Input` (underline/box + error) · `Textarea` · `Select` · `Checkbox` · `Switch` · `OtpInput` · `CopyField`
 **Layout & feedback** — `Panel` · `Divider` · `SectionHeader` · `StatStrip` · `Alert` · `Modal` · `SegmentedControl` · `Pagination` · `Accordion` · `TopBar` · `Footer`
-**Data & media** — `Stat` · `ProgressBar` · `DataList` · `DistributionBar` · `Legend` · `Badge` · `Ribbon` · `MediaCard` · `ArticleCard` · `Avatar`
+**Data & media** — `Stat` · `ProgressBar` · `DataList` · `DistributionBar` · `Legend` · `Badge` · `Ribbon` · `MediaCard` · `ArticleCard` · `SdgCard` · `QuizCard` · `CategoryCard` · `SpeciesGrid` · `Avatar` · `Skeleton`
 
 Most ship a `tailwind-variants` recipe (exported alongside the component) so variants
 are typed and composable. See the Storybook for every variant and state.

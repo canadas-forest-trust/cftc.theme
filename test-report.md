@@ -1,12 +1,12 @@
 # Test Report — Theme Component Tests
 
-## Status: DONE
+**Status:** HISTORICAL (snapshot 2026-07-09)
 
 ## Summary
 - **Total tests written:** 256
 - **Tests passing:** 256
 - **Tests failing:** 0
-- **Test files:** 37 (one per exported component)
+- **Test files:** 38 (one per exported component except `Skeleton`)
 
 ## Setup
 - Vitest 4.1.9 + @testing-library/react 16 + @testing-library/user-event 14
@@ -14,10 +14,10 @@
 - jsdom environment, globals: true, css: false
 
 ## Coverage
-All 37 exported components from `src/index.ts` have tests:
+38 exported components from `src/index.ts` have tests. **`Skeleton` is exported but has no test file yet.**
 
-### Typography (4)
-- eyebrow, display, heading, text
+### Typography (5)
+- eyebrow, label, display, heading, text
 
 ### Forms (8)
 - button, input, select, checkbox, switch, textarea, otp-input, copy-field
