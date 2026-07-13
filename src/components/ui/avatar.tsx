@@ -6,7 +6,7 @@ export const avatar = tv({
   variants: {
     tone: {
       accent: "bg-accent text-accent-fg",
-      ink: "bg-ink text-inverse",
+      ink: "bg-dark text-inverse",
     },
     size: {
       sm: "size-8 text-xs",

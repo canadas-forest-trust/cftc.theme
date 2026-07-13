@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { DataList } from "./data-list";
+import { DataListLink } from "./data-list-link";
 import { DistributionBar } from "./distribution-bar";
 import { Legend } from "./legend";
 import { StatStrip } from "./stat-strip";
@@ -13,13 +14,21 @@ export const Locations: Story = {
     <div className="max-w-2xl">
       <DataList
         columns={[
-          { key: "location", label: "Location" },
+          { key: "forest", label: "Smart Forest" },
+          { key: "account", label: "Account" },
           { key: "trees", label: "Trees", align: "right" },
-          { key: "co2", label: "CO₂", align: "right" },
         ]}
         rows={[
-          { location: "Porter Cove", trees: "6,000", co2: "748.5 kg" },
-          { location: "Doakdown", trees: "3,000", co2: "61.3 kg" },
+          {
+            forest: <DataListLink href="#forest">Porter Cove</DataListLink>,
+            account: <DataListLink href="#account">Acme Forestry</DataListLink>,
+            trees: "6,000",
+          },
+          {
+            forest: <DataListLink href="#forest">Doakdown</DataListLink>,
+            account: <DataListLink href="#account">Northwind Co</DataListLink>,
+            trees: "3,000",
+          },
         ]}
         onRowClick={() => {}}
       />

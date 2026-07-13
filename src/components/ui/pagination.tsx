@@ -5,7 +5,7 @@ export interface PaginationProps {
   className?: string;
 }
 
-/** Pagination — square numbered page cells; active cell solid ink. */
+/** Pagination — square numbered page cells; active cell solid dark. */
 export function Pagination({ page, pageCount, onPageChange, className }: PaginationProps) {
   const pages = Array.from({ length: pageCount }, (_, i) => i + 1);
   const cell =
@@ -24,7 +24,7 @@ export function Pagination({ page, pageCount, onPageChange, className }: Paginat
             className={[
               cell,
               active
-                ? "border-ink bg-ink text-inverse"
+                ? "border-dark bg-dark text-inverse"
                 : "border-field bg-panel text-ink hover:border-line-strong",
             ].join(" ")}
           >

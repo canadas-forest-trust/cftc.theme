@@ -10,6 +10,8 @@ export interface SwitchProps {
 /**
  * Switch — square-knob toggle (track strong→accent). Used for feature toggles
  * (Highlight, Contribute, Fundraiser) in the customizer.
+ * Track uses bg-accent when on; keep the knob as bg-panel (no text-accent-fg)
+ * so admin solid-button styles do not restyle this control.
  */
 export function Switch({
   checked,
@@ -23,13 +25,14 @@ export function Switch({
     <button
       type="button"
       role="switch"
+      data-switch=""
       id={id}
       aria-checked={checked}
       aria-label={ariaLabel}
       disabled={disabled}
       onClick={() => onCheckedChange?.(!checked)}
       className={[
-        "relative inline-flex h-6 w-11 shrink-0 items-center transition-colors outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:opacity-40",
+        "relative inline-flex h-6 w-11 shrink-0 items-center p-0 transition-colors outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:opacity-40 disabled:pointer-events-none",
         checked ? "bg-accent" : "bg-line-strong",
         className ?? "",
       ].join(" ")}

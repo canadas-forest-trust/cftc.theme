@@ -51,6 +51,18 @@ describe('DataList', () => {
     expect(screen.queryByRole('button')).not.toBeInTheDocument()
   })
 
+  it('renders framed chrome by default', () => {
+    const { container } = render(<DataList columns={COLUMNS} rows={ROWS} layout="table" />)
+    expect(container.firstChild).toHaveClass('rounded-lg', 'border', 'border-hairline')
+  })
+
+  it('omits frame when framed={false}', () => {
+    const { container } = render(
+      <DataList columns={COLUMNS} rows={ROWS} layout="table" framed={false} />,
+    )
+    expect(container.firstChild).not.toHaveClass('rounded-lg')
+  })
+
   it('truncates long cell text without overlapping adjacent columns', () => {
     const longTitle =
       'Complete_with_Docusign - Scouts Canada and CFT (updated April 1 2024).pdf'

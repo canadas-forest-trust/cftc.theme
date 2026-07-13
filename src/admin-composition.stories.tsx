@@ -3,8 +3,8 @@ import { PageHeader } from "./components/ui/page-header";
 import { AdminSection } from "./components/ui/admin-section";
 import { WorkQueue } from "./components/ui/work-queue";
 import { StatStrip } from "./components/ui/stat-strip";
-import { Panel } from "./components/ui/panel";
-import { Text } from "./components/ui/text";
+import { DataList } from "./components/ui/data-list";
+import { DataListLink } from "./components/ui/data-list-link";
 import { Badge } from "./components/ui/badge";
 import "./styles/admin.theme.css";
 
@@ -43,17 +43,22 @@ export const HomeBands: Story = {
             </a>
           }
         >
-          <Panel variant="inset" className="flex items-center justify-between gap-4">
-            <div className="flex flex-col gap-1">
-              <Text tone="ink">Evergreen Forestry</Text>
-              <Text size="sm" tone="muted">
-                Corporate · Qualified
-              </Text>
-            </div>
-            <a href="#review" className="text-sm font-medium text-accent hover:text-accent-strong">
-              Review →
-            </a>
-          </Panel>
+          <DataList
+            primaryColumn="org"
+            columns={[
+              { key: "org", label: "Organization" },
+              { key: "type", label: "Type" },
+              { key: "status", label: "Status" },
+            ]}
+            rows={[
+              {
+                org: <DataListLink href="#lead">Evergreen Forestry</DataListLink>,
+                type: "Corporate",
+                status: <Badge variant="soft">Qualified</Badge>,
+              },
+            ]}
+            onRowClick={() => {}}
+          />
         </WorkQueue>
 
         <WorkQueue
@@ -65,20 +70,27 @@ export const HomeBands: Story = {
             </a>
           }
         >
-          <div className="grid gap-3 md:grid-cols-2">
-            <Panel variant="inset" className="flex flex-col gap-2">
-              <Text tone="ink">ABC Smart Forest</Text>
-              <div className="flex flex-wrap gap-2">
-                <Badge variant="soft">Not published</Badge>
-              </div>
-            </Panel>
-            <Panel variant="inset" className="flex flex-col gap-2">
-              <Text tone="ink">XYZ Community Forest</Text>
-              <div className="flex flex-wrap gap-2">
-                <Badge variant="soft">Missing unique code</Badge>
-              </div>
-            </Panel>
-          </div>
+          <DataList
+            primaryColumn="forest"
+            columns={[
+              { key: "forest", label: "Smart Forest" },
+              { key: "account", label: "Account" },
+              { key: "issues", label: "Issues" },
+            ]}
+            rows={[
+              {
+                forest: <DataListLink href="#forest">ABC Smart Forest</DataListLink>,
+                account: <DataListLink href="#account">Acme</DataListLink>,
+                issues: "Not published",
+              },
+              {
+                forest: <DataListLink href="#forest">XYZ Community Forest</DataListLink>,
+                account: <DataListLink href="#account">Northwind</DataListLink>,
+                issues: "Missing unique code",
+              },
+            ]}
+            onRowClick={() => {}}
+          />
         </WorkQueue>
 
         <WorkQueue title="Onboarding stuck" count={0} hideWhenEmpty />
@@ -112,9 +124,20 @@ export const HomeBands: Story = {
           </a>
         }
       >
-        <Text size="sm" tone="muted">
-          DataList goes here on the live dashboard.
-        </Text>
+        <DataList
+          primaryColumn="org"
+          columns={[
+            { key: "org", label: "Organization" },
+            { key: "stage", label: "Stage" },
+          ]}
+          rows={[
+            {
+              org: <DataListLink href="#account">Evergreen Forestry</DataListLink>,
+              stage: <Badge variant="soft">Active</Badge>,
+            },
+          ]}
+          onRowClick={() => {}}
+        />
       </AdminSection>
     </AdminPreview>
   ),

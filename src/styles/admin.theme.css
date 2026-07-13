@@ -95,7 +95,7 @@
     font-size: var(--font-size-display);
   }
 
-  [data-app="admin"] button:not([data-list-row]),
+  [data-app="admin"] button:not([data-list-row]):not([data-switch]),
   [data-app="admin"] input:not([type="checkbox"]):not([type="radio"]):not([type="color"]),
   [data-app="admin"] textarea,
   [data-app="admin"] select {
@@ -114,8 +114,8 @@
     border-radius: var(--radius-lg);
   }
 
-  /* Primary solid buttons — use semantic tokens directly for reliable contrast */
-  [data-app="admin"] button.bg-accent {
+  /* Primary solid buttons — not switches (Switch also uses bg-accent when on). */
+  [data-app="admin"] button.bg-accent.text-accent-fg {
     background-color: var(--color-accent-default);
     color: var(--color-accent-fg);
     font-size: 0.875rem;
@@ -124,7 +124,7 @@
     min-height: 2.5rem;
   }
 
-  [data-app="admin"] button.bg-accent:hover {
+  [data-app="admin"] button.bg-accent.text-accent-fg:hover {
     background-color: var(--color-accent-strong);
     color: var(--color-accent-fg);
   }
@@ -143,6 +143,33 @@
   [data-app="admin"] .admin-data {
     font-family: var(--font-role-eyebrow);
     font-size: 0.8125rem;
+  }
+
+  /* Tables — clearer chrome inside admin */
+  [data-app="admin"] [data-list-table] {
+    font-size: 0.875rem;
+  }
+
+  [data-app="admin"] [data-list-header] {
+    background: var(--color-bg-inset);
+  }
+
+  [data-app="admin"] [data-list-header] .font-eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  [data-app="admin"] [data-list-row] {
+    min-height: 2.75rem;
+  }
+
+  [data-app="admin"] button[data-list-row]:hover {
+    background: color-mix(in oklab, var(--color-bg-active) 70%, transparent);
+  }
+
+  [data-app="admin"] button[data-list-row]:focus-visible {
+    background: var(--color-bg-active);
   }
 
   /* Mobile card lists — comfortable tap targets */

@@ -10,7 +10,7 @@ export const ribbon = tv({
     tone: {
       gold: "bg-gold text-inverse",
       accent: "bg-accent text-accent-fg",
-      ink: "bg-ink text-inverse",
+      ink: "bg-dark text-inverse",
     },
   },
   defaultVariants: { tone: "gold" },

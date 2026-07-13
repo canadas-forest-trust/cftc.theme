@@ -44,6 +44,11 @@ export { Stat, type StatProps } from "./components/ui/stat";
 export { ProgressBar, type ProgressBarProps } from "./components/ui/progress-bar";
 export { DataList, type DataListProps, type DataColumn } from "./components/ui/data-list";
 export {
+  DataListLink,
+  dataListLinkClassName,
+  type DataListLinkProps,
+} from "./components/ui/data-list-link";
+export {
   DistributionBar,
   type DistributionBarProps,
   type DistributionItem,

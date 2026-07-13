@@ -72,7 +72,7 @@ IBM Plex Mono is used for admin data/labels.
 **Typography** — `Eyebrow` · `Label` · `Display` · `Heading` · `Text`
 **Forms** — `Button` · `Input` (underline/box + error) · `Textarea` · `Select` · `Checkbox` · `Switch` · `OtpInput` · `CopyField`
 **Layout & feedback** — `Panel` · `Divider` · `SectionHeader` · `PageHeader` · `AdminSection` · `WorkQueue` · `StatStrip` · `Alert` · `Modal` · `SegmentedControl` · `Pagination` · `Accordion` · `TopBar` · `Footer`
-**Data & media** — `Stat` · `ProgressBar` · `DataList` · `DistributionBar` · `Legend` · `Badge` · `Ribbon` · `MediaCard` · `ArticleCard` · `SdgCard` · `QuizCard` · `CategoryCard` · `SpeciesGrid` · `Avatar` · `Skeleton`
+**Data & media** — `Stat` · `ProgressBar` · `DataList` · `DataListLink` · `DistributionBar` · `Legend` · `Badge` · `Ribbon` · `MediaCard` · `ArticleCard` · `SdgCard` · `QuizCard` · `CategoryCard` · `SpeciesGrid` · `Avatar` · `Skeleton`
 
 Most ship a `tailwind-variants` recipe (exported alongside the component) so variants
 are typed and composable. See the Storybook for every variant and state.
