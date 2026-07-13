@@ -13,6 +13,11 @@ describe('Heading', () => {
     expect(container.querySelector('h2')).toBeInTheDocument()
   })
 
+  it('renders as h1 when as="h1"', () => {
+    const { container } = render(<Heading as="h1">Page title</Heading>)
+    expect(container.querySelector('h1')).toBeInTheDocument()
+  })
+
   it('renders as h3 when as="h3"', () => {
     const { container } = render(<Heading as="h3">H3</Heading>)
     expect(container.querySelector('h3')).toBeInTheDocument()

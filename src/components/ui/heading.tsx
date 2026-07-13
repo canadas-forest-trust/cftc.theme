@@ -24,7 +24,7 @@ export const heading = tv({
 export interface HeadingProps
   extends React.HTMLAttributes<HTMLHeadingElement>,
     VariantProps<typeof heading> {
-  as?: "h2" | "h3" | "h4" | "div";
+  as?: "h1" | "h2" | "h3" | "h4" | "div";
 }
 
 export function Heading({ as: Tag = "h2", size, tone, className, ...props }: HeadingProps) {

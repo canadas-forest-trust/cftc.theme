@@ -5,5 +5,12 @@
     "md": { "$value": "0.5rem" },
     "lg": { "$value": "0.75rem" },
     "full": { "$value": "9999px" }
+  },
+  "density": {
+    "$type": "dimension",
+    "section-gap": { "$value": "1.5rem" },
+    "page-pad-y": { "$value": "1.5rem" },
+    "stat-pad": { "$value": "0.875rem" },
+    "page-title": { "$value": "1.5rem" }
   }
 }

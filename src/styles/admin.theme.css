@@ -71,6 +71,14 @@
     line-height: 1.3;
   }
 
+  /* Portal Label is uppercase editorial chrome — ops admin uses sentence case. */
+  [data-app="admin"] .font-body.uppercase,
+  [data-app="admin"] .font-eyebrow.uppercase {
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+  }
+
   [data-app="admin"] .font-display {
     font-family: var(--font-role-body);
     font-weight: 600;

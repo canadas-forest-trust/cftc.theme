@@ -33,4 +33,10 @@ describe('StatStrip', () => {
     expect(screen.getByText('TREES')).toBeInTheDocument()
     expect(screen.getByText('100')).toBeInTheDocument()
   })
+
+  it('renders compact density without crashing', () => {
+    render(<StatStrip density="compact" items={ITEMS} />)
+    expect(screen.getByText('SEEDLINGS')).toBeInTheDocument()
+    expect(screen.getByText('2,400')).toBeInTheDocument()
+  })
 })
