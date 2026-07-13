@@ -74,5 +74,7 @@ IBM Plex Mono is used for admin data/labels.
 **Layout & feedback** — `Panel` · `Divider` · `SectionHeader` · `PageHeader` · `AdminSection` · `WorkQueue` · `StatStrip` · `Alert` · `Modal` · `SegmentedControl` · `Pagination` · `Accordion` · `TopBar` · `Footer`
 **Data & media** — `Stat` · `ProgressBar` · `DataList` · `DataListLink` · `DistributionBar` · `Legend` · `Badge` · `Ribbon` · `MediaCard` · `ArticleCard` · `SdgCard` · `QuizCard` · `CategoryCard` · `SpeciesGrid` · `Avatar` · `Skeleton`
 
+`DataList` is framed by default; rows are focusable `div`s (not nested `<button>`s) so entity cells can use `DataListLink` (`as={Link}` for Next) without invalid HTML. Prefer `DataListLink` over plain text for admin entity names that navigate.
+
 Most ship a `tailwind-variants` recipe (exported alongside the component) so variants
 are typed and composable. See the Storybook for every variant and state.
