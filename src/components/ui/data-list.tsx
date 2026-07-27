@@ -23,8 +23,9 @@ function isPrimaryColumn(column: DataColumn, columns: DataColumn[]): boolean {
 }
 
 function gridColumnWidth(column: DataColumn): string {
-  if (isActionColumn(column)) return "auto";
-  if (column.align === "right") return "minmax(4.5rem, max-content)";
+  if (isActionColumn(column)) return "max-content";
+  // Prefer fr tracks so columns share width instead of growing past the pane.
+  if (column.align === "right") return "minmax(4.5rem, 1fr)";
   return "minmax(0, 1fr)";
 }
 
@@ -221,8 +222,8 @@ export function DataList({
 
   if (layout === "table") {
     return (
-      <div className={["overflow-x-auto", frameClass, className ?? ""].filter(Boolean).join(" ")}>
-        <DataListTable columns={columns} rows={rows} onRowClick={onRowClick} className="min-w-[32rem]" />
+      <div className={["min-w-0", frameClass, className ?? ""].filter(Boolean).join(" ")}>
+        <DataListTable columns={columns} rows={rows} onRowClick={onRowClick} className="min-w-0" />
       </div>
     );
   }

@@ -2,7 +2,7 @@ import { cn } from "../../lib/cn";
 
 /** Accent link styles for named entities inside a DataList cell. */
 export const dataListLinkClassName =
-  "text-accent hover:text-accent-strong focus-visible:outline-none focus-visible:underline";
+  "inline-block max-w-full truncate text-accent hover:text-accent-strong focus-visible:outline-none focus-visible:underline";
 
 type DataListLinkOwnProps<E extends React.ElementType = "a"> = {
   /** Router Link (e.g. next/link) or default `"a"`. */
