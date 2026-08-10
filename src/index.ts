@@ -28,7 +28,7 @@ export { AdminSection, type AdminSectionProps } from "./components/ui/admin-sect
 export { WorkQueue, type WorkQueueProps } from "./components/ui/work-queue";
 export { StatStrip, type StatStripProps } from "./components/ui/stat-strip";
 export { Alert, alert, type AlertProps } from "./components/ui/alert";
-export { Modal, type ModalProps } from "./components/ui/modal";
+export { Modal, type ModalProps, type ModalSize } from "./components/ui/modal";
 export {
   SegmentedControl,
   type SegmentedControlProps,

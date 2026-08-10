@@ -1,6 +1,6 @@
 {
   "name": "@canadas-forest-trust/theme",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "Canada's Forest Trust — design tokens & component base (editorial/Swiss-minimal). Source of truth for the partner portal and staff admin.",
   "type": "module",
   "license": "MIT",

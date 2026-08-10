@@ -1,6 +1,18 @@
 import { useEffect } from "react";
 import { Eyebrow } from "./eyebrow";
 import { Display } from "./display";
+import { cn } from "../../lib/cn";
+
+const SIZE_CLASS = {
+  /** ~32rem — compact confirm / share dialogs */
+  md: "max-w-lg",
+  /** ~42rem — admin forms with two-column grids (default) */
+  lg: "max-w-2xl",
+  /** ~48rem — dense multi-section forms */
+  xl: "max-w-3xl",
+} as const;
+
+export type ModalSize = keyof typeof SIZE_CLASS;
 
 export interface ModalProps {
   open: boolean;
@@ -11,6 +23,8 @@ export interface ModalProps {
   children: React.ReactNode;
   /** Footer actions (buttons), right-aligned. */
   footer?: React.ReactNode;
+  /** Panel width. Defaults to `lg` so admin forms aren't cramped. */
+  size?: ModalSize;
   className?: string;
 }
 
@@ -18,7 +32,16 @@ export interface ModalProps {
  * Modal — centered dialog over a scrim. Closes on Escape and backdrop click.
  * Square panel, hairline border, shadow-lg. Title wired via aria-labelledby.
  */
-export function Modal({ open, onClose, eyebrow, title, children, footer, className }: ModalProps) {
+export function Modal({
+  open,
+  onClose,
+  eyebrow,
+  title,
+  children,
+  footer,
+  size = "lg",
+  className,
+}: ModalProps) {
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -44,10 +67,11 @@ export function Modal({ open, onClose, eyebrow, title, children, footer, classNa
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className={[
-          "relative z-10 flex max-h-[85vh] w-full max-w-lg flex-col border border-hairline bg-panel shadow-lg",
-          className ?? "",
-        ].join(" ")}
+        className={cn(
+          "relative z-10 flex max-h-[85vh] w-full flex-col border border-hairline bg-panel shadow-lg",
+          SIZE_CLASS[size],
+          className,
+        )}
       >
         <div className="flex items-start justify-between gap-4 border-b border-hairline p-6">
           <div className="flex flex-col gap-2">
