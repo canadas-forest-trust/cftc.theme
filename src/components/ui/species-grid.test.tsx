@@ -15,62 +15,54 @@ describe('SpeciesGrid', () => {
     expect(container.querySelector('div')).toBeInTheDocument()
   })
 
-  it('renders species names in the legend', () => {
+  it('renders species names in the list', () => {
     render(<SpeciesGrid species={SPECIES} />)
-    expect(screen.getByText(/Black Spruce/)).toBeInTheDocument()
-    expect(screen.getByText(/Trembling Aspen/)).toBeInTheDocument()
-    expect(screen.getByText(/Jack Pine/)).toBeInTheDocument()
+    expect(screen.getByText('Black Spruce')).toBeInTheDocument()
+    expect(screen.getByText('Trembling Aspen')).toBeInTheDocument()
+    expect(screen.getByText('Jack Pine')).toBeInTheDocument()
   })
 
   it('renders the waffle grid', () => {
     const { container } = render(<SpeciesGrid species={SPECIES} />)
-    expect(container.querySelector('[role="img"]')).toBeInTheDocument()
+    expect(
+      container.querySelector('[aria-label="Species composition grid"]'),
+    ).toBeInTheDocument()
   })
 
   it('renders grid with default 100 cells', () => {
     const { container } = render(<SpeciesGrid species={SPECIES} />)
-    const grid = container.querySelector('[role="img"]')
-    // Buttons within the grid (some are empty cells with tabIndex=-1)
+    const grid = container.querySelector('[aria-label="Species composition grid"]')
     expect(grid?.querySelectorAll('button').length).toBe(100)
   })
 
-  it('shows the default hint text before selection', () => {
+  it('selects the first species by default and shows its description', () => {
     render(<SpeciesGrid species={SPECIES} />)
-    expect(screen.getByText('Select a species to learn more')).toBeInTheDocument()
+    expect(screen.getByText('Common boreal species')).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: /Black Spruce, 40%/, pressed: true }),
+    ).toBeInTheDocument()
   })
 
-  it('clicking a legend item highlights species and shows detail', async () => {
+  it('clicking a list item selects that species', async () => {
     const user = userEvent.setup()
     render(<SpeciesGrid species={SPECIES} />)
-    // The legend is outside the grid img; get all buttons with the name, find the one outside [role=img]
-    const allButtons = screen.getAllByRole('button', { name: /Black Spruce/ })
-    // The legend button is the one NOT inside the role=img grid
-    const legendButton = allButtons.find(btn => !btn.closest('[role="img"]'))!
-    await user.click(legendButton)
-    expect(screen.getByText('Common boreal species')).toBeInTheDocument()
-  })
-
-  it('clicking legend item again deselects it', async () => {
-    const user = userEvent.setup()
-    render(<SpeciesGrid species={SPECIES} />)
-    const allButtons = screen.getAllByRole('button', { name: /Black Spruce/ })
-    const legendButton = allButtons.find(btn => !btn.closest('[role="img"]'))!
-    await user.click(legendButton)
-    expect(screen.getByText('Common boreal species')).toBeInTheDocument()
-    await user.click(legendButton)
-    expect(screen.queryByText('Common boreal species')).not.toBeInTheDocument()
-    expect(screen.getByText('Select a species to learn more')).toBeInTheDocument()
+    const aspen = screen.getByRole('button', { name: /Trembling Aspen, 35%/ })
+    await user.click(aspen)
+    expect(aspen).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByText('Deciduous forest tree')).toBeInTheDocument()
   })
 
   it('shows fallback description for species without description', async () => {
     const user = userEvent.setup()
-    const speciesNoDesc = [
-      { name: 'Unknown Tree', color: '#aaa', percent: 100 },
-    ]
+    const speciesNoDesc = [{ name: 'Unknown Tree', color: '#aaa', percent: 100 }]
     render(<SpeciesGrid species={speciesNoDesc} />)
-    const allButtons = screen.getAllByRole('button', { name: /Unknown Tree/ })
-    const legendButton = allButtons.find(btn => !btn.closest('[role="img"]'))!
-    await user.click(legendButton)
-    expect(screen.getByText('No description available for this species yet.')).toBeInTheDocument()
+    expect(
+      screen.getByText('No description available for this species yet.'),
+    ).toBeInTheDocument()
+    const btn = screen.getByRole('button', { name: /Unknown Tree, 100%/ })
+    await user.click(btn)
+    expect(
+      screen.getByText('No description available for this species yet.'),
+    ).toBeInTheDocument()
   })
 })
