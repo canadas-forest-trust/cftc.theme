@@ -65,7 +65,8 @@ import "@canadas-forest-trust/theme/admin.css";    // admin preset (dark, interf
 ```
 
 Admin semantic tokens live in `tokens/semantic-admin/` → `src/styles/admin.tokens.css`.
-IBM Plex Mono is used for admin data/labels.
+Admin uses **Archivo** for UI (same as portal) and **IBM Plex Mono** for data/labels —
+density and casing differ from portal, not the sans family.
 
 ## Components
 
