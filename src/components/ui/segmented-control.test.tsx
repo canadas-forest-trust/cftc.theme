@@ -44,4 +44,12 @@ describe('SegmentedControl', () => {
     render(<SegmentedControl options={OPTIONS} value="monthly" aria-label="Time period" />)
     expect(screen.getByRole('tablist', { name: 'Time period' })).toBeInTheDocument()
   })
+
+  it('keeps segments square so the group reads as one control', () => {
+    const { container } = render(<SegmentedControl options={OPTIONS} value="monthly" />)
+    expect(container.firstChild).toHaveClass('overflow-hidden', 'bg-panel')
+    for (const tab of screen.getAllByRole('tab')) {
+      expect(tab).toHaveClass('rounded-none')
+    }
+  })
 })

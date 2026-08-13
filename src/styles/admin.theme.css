@@ -95,7 +95,8 @@
     font-size: var(--font-size-display);
   }
 
-  [data-app="admin"] button:not([data-list-row]):not([data-switch]),
+  /* Standalone controls — not segmented tabs (those share one outer radius). */
+  [data-app="admin"] button:not([data-list-row]):not([data-switch]):not([role="tab"]),
   [data-app="admin"] input:not([type="checkbox"]):not([type="radio"]):not([type="color"]),
   [data-app="admin"] textarea,
   [data-app="admin"] select {
@@ -103,7 +104,7 @@
   }
 
   /* Keep short form controls from stretching across long admin layouts. */
-  [data-app="admin"] input:not([type="checkbox"]):not([type="radio"]):not([type="color"]):not([type="file"]):not([type="hidden"]):not([type="range"]):not([type="submit"]):not([type="button"]),
+  [data-app="admin"] input:not([type="checkbox"]):not([type="radio"]):not([type="color"]):not([type="file"]):not([type="hidden]):not([type="range"]):not([type="submit"]):not([type="button"]),
   [data-app="admin"] select {
     max-width: 250px;
   }
@@ -120,8 +121,19 @@
     border-radius: var(--radius-lg);
   }
 
-  /* Primary solid buttons — not switches (Switch also uses bg-accent when on). */
-  [data-app="admin"] button.bg-accent.text-accent-fg {
+  /* SegmentedControl — one rounded frame; square segments inside. */
+  [data-app="admin"] [role="tablist"] {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background-color: var(--color-bg-panel);
+  }
+
+  [data-app="admin"] [role="tablist"] > [role="tab"] {
+    border-radius: 0;
+  }
+
+  /* Primary solid buttons — not switches or segmented tabs. */
+  [data-app="admin"] button.bg-accent.text-accent-fg:not([role="tab"]) {
     background-color: var(--color-accent-default);
     color: var(--color-accent-fg);
     font-size: 0.875rem;
@@ -130,7 +142,7 @@
     min-height: 2.5rem;
   }
 
-  [data-app="admin"] button.bg-accent.text-accent-fg:hover {
+  [data-app="admin"] button.bg-accent.text-accent-fg:not([role="tab"]):hover {
     background-color: var(--color-accent-strong);
     color: var(--color-accent-fg);
   }

@@ -26,7 +26,7 @@ export function SegmentedControl({
     <div
       role="tablist"
       aria-label={ariaLabel}
-      className={["inline-flex border border-field", className ?? ""].join(" ")}
+      className={["inline-flex w-fit max-w-full shrink-0 self-start items-stretch overflow-hidden border border-field bg-panel", className ?? ""].join(" ")}
     >
       {options.map((o) => {
         const active = o.value === value;
@@ -38,8 +38,8 @@ export function SegmentedControl({
             aria-selected={active}
             onClick={() => onChange?.(o.value)}
             className={[
-              "px-4 py-2 font-eyebrow text-xs uppercase tracking-wide transition-colors",
-              active ? "bg-accent text-accent-fg" : "bg-panel text-muted hover:text-ink",
+              "rounded-none px-4 py-2 font-eyebrow text-xs uppercase tracking-wide transition-colors",
+              active ? "bg-accent text-accent-fg" : "bg-transparent text-muted hover:text-ink",
             ].join(" ")}
           >
             {o.label}
