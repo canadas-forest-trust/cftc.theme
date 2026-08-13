@@ -50,6 +50,7 @@ describe('SpeciesGrid', () => {
     await user.click(aspen)
     expect(aspen).toHaveAttribute('aria-pressed', 'true')
     expect(screen.getByText('Deciduous forest tree')).toBeInTheDocument()
+    expect(screen.queryByText('Common boreal species')).not.toBeInTheDocument()
   })
 
   it('shows fallback description for species without description', async () => {
