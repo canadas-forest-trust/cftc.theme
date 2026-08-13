@@ -13,32 +13,25 @@ export interface SpeciesDatum {
 
 export interface SpeciesGridProps {
   species: SpeciesDatum[];
-  /** Total cells in the waffle matrix (default 100 = 10×10). */
+  /**
+   * @deprecated Waffle matrix removed; retained for call-site compatibility.
+   */
   cells?: number;
   className?: string;
 }
 
 /**
- * SpeciesGrid — thin share bar + compact waffle beside a dense species list.
- * Selecting a species dims other matrix cells and reveals that row’s description.
+ * SpeciesGrid — share bar + selectable species rows with per-species tracks.
+ * Selecting a species dims other bar segments and reveals that row’s description.
  */
-export function SpeciesGrid({ species, cells = 100, className }: SpeciesGridProps) {
+export function SpeciesGrid({ species, className }: SpeciesGridProps) {
   const [selected, setSelected] = useState<number>(species.length > 0 ? 0 : -1);
-
-  const flat: number[] = [];
-  species.forEach((s, i) => {
-    const n = Math.round((s.percent / 100) * cells);
-    for (let k = 0; k < n; k++) flat.push(i);
-  });
-  while (flat.length < cells) flat.push(-1);
-  flat.length = cells;
-
   const dimming = selected >= 0;
 
   return (
-    <div className={cn("flex flex-col gap-5", className)}>
+    <div className={cn("flex flex-col gap-6", className)}>
       <div
-        className="flex h-1.5 w-full overflow-hidden bg-inset"
+        className="flex h-3 w-full gap-px overflow-hidden bg-inset"
         role="img"
         aria-label="Species composition"
       >
@@ -50,8 +43,8 @@ export function SpeciesGrid({ species, cells = 100, className }: SpeciesGridProp
             aria-label={`${s.name} ${Math.round(s.percent)}%`}
             aria-pressed={selected === i}
             className={cn(
-              "h-full border-0 p-0 transition-opacity",
-              dimming && selected !== i && "opacity-30",
+              "h-full border-0 p-0 transition-[opacity,filter] duration-200",
+              dimming && selected !== i && "opacity-35",
             )}
             style={{
               width: `${Math.max(0, Math.min(100, s.percent))}%`,
@@ -61,93 +54,74 @@ export function SpeciesGrid({ species, cells = 100, className }: SpeciesGridProp
         ))}
       </div>
 
-      <div className="grid items-start gap-6 sm:grid-cols-[7.5rem_1fr] sm:gap-8">
-        <div className="flex flex-col gap-2">
-          <div
-            className="grid w-full max-w-[7.5rem] grid-cols-10 gap-px"
-            role="img"
-            aria-label="Species composition grid"
-          >
-            {flat.map((idx, i) => {
-              const empty = idx === -1;
-              const dim = dimming && !empty && idx !== selected;
-              const active = dimming && !empty && idx === selected;
-              return (
-                <button
-                  key={i}
-                  type="button"
-                  tabIndex={empty ? -1 : 0}
-                  disabled={empty}
-                  onClick={() => setSelected(idx)}
-                  aria-label={empty ? "empty" : species[idx].name}
-                  className={cn(
-                    "aspect-square appearance-none border-0 p-0 transition-opacity",
-                    dim && "opacity-25",
-                    active && "outline outline-1 outline-ink outline-offset-0",
-                  )}
-                  style={{
-                    backgroundColor: empty
-                      ? "var(--color-bg-inset)"
-                      : species[idx].color,
-                  }}
-                />
-              );
-            })}
-          </div>
-          <p className="m-0 font-eyebrow text-[0.625rem] uppercase tracking-label text-muted">
-            1 cell ≈ 1%
-          </p>
-        </div>
+      <ul className="m-0 flex list-none flex-col gap-1 p-0" aria-label="Species">
+        {species.map((s, i) => {
+          const pressed = selected === i;
+          const pct = Math.round(s.percent);
+          const description =
+            s.description?.trim() || "No description available for this species yet.";
 
-        <ul className="m-0 flex list-none flex-col divide-y divide-hairline border-y border-hairline p-0">
-          {species.map((s, i) => {
-            const pressed = selected === i;
-            const description =
-              s.description?.trim() || "No description available for this species yet.";
-            return (
-              <li key={s.name} className="m-0 p-0">
-                <button
-                  type="button"
-                  aria-label={`${s.name}, ${Math.round(s.percent)}%`}
-                  aria-pressed={pressed}
-                  onClick={() => setSelected(i)}
-                  className={cn(
-                    "grid w-full grid-cols-[auto_1fr_auto] gap-x-3 gap-y-0 px-0 py-3 text-left transition-colors",
-                    pressed ? "bg-inset" : "hover:bg-inset",
-                  )}
-                >
-                  <span
-                    className="mt-1.5 size-2.5 shrink-0"
-                    style={{ backgroundColor: s.color }}
-                    aria-hidden="true"
-                  />
-                  <span
-                    className="font-body text-sm font-bold tracking-tight text-ink"
-                    aria-hidden="true"
-                  >
-                    {s.name}
-                  </span>
-                  <span
-                    className="mt-0.5 font-eyebrow text-xs uppercase tracking-wide text-muted tabular-nums"
-                    aria-hidden="true"
-                  >
-                    {Math.round(s.percent)}%
-                  </span>
-                  {pressed && (
-                    <Text
-                      size="sm"
-                      tone="muted"
-                      className="col-start-2 col-end-[-1] mt-1.5 leading-relaxed"
+          return (
+            <li key={s.name} className="m-0 p-0">
+              <button
+                type="button"
+                aria-label={`${s.name}, ${pct}%`}
+                aria-pressed={pressed}
+                onClick={() => setSelected(i)}
+                className={cn(
+                  "w-full border-l-2 px-3 py-3 text-left transition-colors duration-200",
+                  pressed
+                    ? "border-ink bg-inset"
+                    : "border-transparent hover:bg-inset",
+                )}
+              >
+                <div className="flex items-baseline justify-between gap-4">
+                  <span className="flex min-w-0 items-center gap-2.5">
+                    <span
+                      className="size-2.5 shrink-0"
+                      style={{ backgroundColor: s.color }}
+                      aria-hidden="true"
+                    />
+                    <span
+                      className="truncate font-body text-sm font-bold tracking-tight text-ink"
+                      aria-hidden="true"
                     >
-                      {description}
-                    </Text>
-                  )}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+                      {s.name}
+                    </span>
+                  </span>
+                  <span
+                    className="shrink-0 font-eyebrow text-xs uppercase tracking-wide text-muted tabular-nums"
+                    aria-hidden="true"
+                  >
+                    {pct}%
+                  </span>
+                </div>
+
+                <div
+                  className="mt-2.5 h-1 w-full bg-panel"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  <div
+                    className="h-full transition-[width,opacity] duration-300"
+                    style={{
+                      width: `${Math.max(0, Math.min(100, s.percent))}%`,
+                      backgroundColor: s.color,
+                      opacity: pressed ? 1 : 0.55,
+                    }}
+                  />
+                </div>
+
+                {pressed && (
+                  <Text size="sm" tone="muted" className="mt-2.5 leading-relaxed">
+                    {description}
+                  </Text>
+                )}
+              </button>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }

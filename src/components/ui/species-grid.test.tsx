@@ -22,17 +22,17 @@ describe('SpeciesGrid', () => {
     expect(screen.getByText('Jack Pine')).toBeInTheDocument()
   })
 
-  it('renders the waffle grid', () => {
+  it('renders the composition bar', () => {
     const { container } = render(<SpeciesGrid species={SPECIES} />)
     expect(
-      container.querySelector('[aria-label="Species composition grid"]'),
+      container.querySelector('[aria-label="Species composition"]'),
     ).toBeInTheDocument()
   })
 
-  it('renders grid with default 100 cells', () => {
+  it('renders a segment button per species in the composition bar', () => {
     const { container } = render(<SpeciesGrid species={SPECIES} />)
-    const grid = container.querySelector('[aria-label="Species composition grid"]')
-    expect(grid?.querySelectorAll('button').length).toBe(100)
+    const bar = container.querySelector('[aria-label="Species composition"]')
+    expect(bar?.querySelectorAll('button').length).toBe(SPECIES.length)
   })
 
   it('selects the first species by default and shows its description', () => {
