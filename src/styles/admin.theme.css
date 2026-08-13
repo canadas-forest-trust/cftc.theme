@@ -104,7 +104,7 @@
   }
 
   /* Keep short form controls from stretching across long admin layouts. */
-  [data-app="admin"] input:not([type="checkbox"]):not([type="radio"]):not([type="color"]):not([type="file"]):not([type="hidden]):not([type="range"]):not([type="submit"]):not([type="button"]),
+  [data-app="admin"] input:not([type="checkbox"]):not([type="radio"]):not([type="color"]):not([type="file"]):not([type="hidden"]):not([type="range"]):not([type="submit"]):not([type="button"]),
   [data-app="admin"] select {
     max-width: 250px;
   }
