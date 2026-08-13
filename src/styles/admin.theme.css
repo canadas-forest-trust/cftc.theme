@@ -1,4 +1,8 @@
 /* Admin preset — imported from globals.css after portal theme.css. All rules scoped to [data-app="admin"]. */
+@import "@fontsource/ibm-plex-sans/400.css";
+@import "@fontsource/ibm-plex-sans/500.css";
+@import "@fontsource/ibm-plex-sans/600.css";
+@import "@fontsource/ibm-plex-sans/700.css";
 @import "@fontsource/ibm-plex-mono/400.css";
 @import "@fontsource/ibm-plex-mono/500.css";
 @import "@fontsource/ibm-plex-mono/600.css";
@@ -6,8 +10,8 @@
 @import "./admin.tokens.css";
 
 [data-app="admin"] {
-  /* Same sans as portal (Archivo) — one brand voice. Plex Mono for ops data/labels. */
-  --font-sans: "Archivo Variable";
+  /* Plex Sans + Mono — clear ops voice, not Helvetica/Archivo neo-grotesque. */
+  --font-sans: "IBM Plex Sans";
   --font-mono: "IBM Plex Mono";
 
   /*

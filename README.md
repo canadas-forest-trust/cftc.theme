@@ -65,8 +65,8 @@ import "@canadas-forest-trust/theme/admin.css";    // admin preset (dark, interf
 ```
 
 Admin semantic tokens live in `tokens/semantic-admin/` → `src/styles/admin.tokens.css`.
-Admin uses **Archivo** for UI (same as portal) and **IBM Plex Mono** for data/labels —
-density and casing differ from portal, not the sans family.
+Admin uses **IBM Plex Sans** + **IBM Plex Mono** (paired ops UI). Portal keeps
+**Archivo** + **Space Mono** for the editorial brand surface.
 
 ## Components
 

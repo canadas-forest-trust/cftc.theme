@@ -117,7 +117,7 @@ export const ThemeToggle: Story = {
           </div>
           <div className="rounded-lg border border-hairline bg-panel p-6">
             <p className="text-secondary text-sm">
-              Panel on <code className="font-eyebrow">bg-frame</code> — Archivo + IBM Plex Mono.
+              Panel on <code className="font-eyebrow">bg-frame</code> — IBM Plex Sans + Mono.
             </p>
           </div>
         </div>
