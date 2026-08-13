@@ -29,11 +29,13 @@
   ],
   "scripts": {
     "tokens:build": "node scripts/build-tokens.mjs",
+    "verify:css": "node scripts/verify-css.mjs",
     "prestorybook": "pnpm tokens:build",
     "storybook": "storybook dev -p 6006",
     "prebuild-storybook": "pnpm tokens:build",
     "build-storybook": "storybook build -o storybook-static",
-    "prepack": "pnpm tokens:build",
+    "prepack": "pnpm tokens:build && pnpm verify:css && pnpm test",
+    "prepublishOnly": "pnpm prepack",
     "lint": "eslint .",
     "test": "vitest run"
   },
