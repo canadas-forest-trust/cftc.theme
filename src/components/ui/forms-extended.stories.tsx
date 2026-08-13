@@ -3,9 +3,13 @@ import { useState } from "react";
 import { Textarea } from "./textarea";
 import { Select } from "./select";
 import { Checkbox } from "./checkbox";
+import { Radio } from "./radio";
 import { Switch } from "./switch";
 import { CopyField } from "./copy-field";
 import { Input } from "./input";
+import { ColorField } from "./color-field";
+import { FileUpload } from "./file-upload";
+import { Slider } from "./slider";
 
 const meta: Meta = { title: "Components/Forms Extended" };
 export default meta;
@@ -69,6 +73,37 @@ export const Checkboxes: Story = {
   },
 };
 
+export const Radios: Story = {
+  render: () => {
+    const [correct, setCorrect] = useState("b");
+    return (
+      <div className="flex max-w-md flex-col gap-3">
+        <Radio
+          name="correct-answer"
+          label="1000 kg"
+          value="a"
+          checked={correct === "a"}
+          onChange={() => setCorrect("a")}
+        />
+        <Radio
+          name="correct-answer"
+          label="Correct answer — 550 kg"
+          value="b"
+          checked={correct === "b"}
+          onChange={() => setCorrect("b")}
+        />
+        <Radio
+          name="correct-answer"
+          label="200 kg"
+          value="c"
+          checked={correct === "c"}
+          onChange={() => setCorrect("c")}
+        />
+      </div>
+    );
+  },
+};
+
 export const Switches: Story = {
   render: () => {
     const [on, setOn] = useState(true);
@@ -78,6 +113,57 @@ export const Switches: Story = {
         <span className="font-eyebrow text-xs uppercase tracking-wide text-ink">
           Fundraiser {on ? "on" : "off"}
         </span>
+      </div>
+    );
+  },
+};
+
+export const Colour: Story = {
+  render: () => {
+    const [hex, setHex] = useState("#1B6A3E");
+    return (
+      <div className="max-w-md">
+        <ColorField
+          label="Accent colour"
+          value={hex}
+          onChange={setHex}
+          presets={["#1B6A3E", "#0A3D2A", "#B46A3A", "#17150F"]}
+        />
+      </div>
+    );
+  },
+};
+
+export const Upload: Story = {
+  render: () => {
+    const [name, setName] = useState<string | undefined>();
+    return (
+      <div className="max-w-md">
+        <FileUpload
+          label="Hero image"
+          accept="image/*"
+          fileName={name}
+          hint="JPG, PNG, or WebP"
+          onFileChange={(files) => setName(files?.[0]?.name)}
+        />
+      </div>
+    );
+  },
+};
+
+export const Range: Story = {
+  render: () => {
+    const [score, setScore] = useState(40);
+    return (
+      <div className="max-w-md">
+        <Slider
+          label="Minimum score"
+          value={score}
+          min={0}
+          max={100}
+          valueLabel={`${score}%`}
+          onValueChange={setScore}
+        />
       </div>
     );
   },

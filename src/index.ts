@@ -15,7 +15,11 @@ export { Input, input, type InputProps } from "./components/ui/input";
 export { Textarea, type TextareaProps } from "./components/ui/textarea";
 export { Select, type SelectProps, type SelectOption } from "./components/ui/select";
 export { Checkbox, type CheckboxProps } from "./components/ui/checkbox";
+export { Radio, type RadioProps } from "./components/ui/radio";
 export { Switch, type SwitchProps } from "./components/ui/switch";
+export { ColorField, type ColorFieldProps } from "./components/ui/color-field";
+export { FileUpload, type FileUploadProps } from "./components/ui/file-upload";
+export { Slider, type SliderProps } from "./components/ui/slider";
 export { OtpInput, type OtpInputProps } from "./components/ui/otp-input";
 export { CopyField, type CopyFieldProps } from "./components/ui/copy-field";
 
