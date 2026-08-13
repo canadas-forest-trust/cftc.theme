@@ -23,7 +23,7 @@ export function Select({ label, options, variant = "box", className, id, ...prop
           {label}
         </Eyebrow>
       )}
-      <div className="relative">
+      <div className="relative w-full max-w-[250px]">
         <select
           id={id}
           className={[

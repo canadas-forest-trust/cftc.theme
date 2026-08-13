@@ -52,4 +52,18 @@ describe('Switch', () => {
     const { container } = render(<Switch checked={false} aria-label="Feature toggle" />)
     expect(await axe(container)).toHaveNoViolations()
   })
+
+  it('toggles when the label is clicked', async () => {
+    const user = userEvent.setup()
+    const onCheckedChange = vi.fn()
+    render(
+      <Switch
+        checked={false}
+        onCheckedChange={onCheckedChange}
+        label="Show sustainability badge"
+      />,
+    )
+    await user.click(screen.getByText('Show sustainability badge'))
+    expect(onCheckedChange).toHaveBeenCalledWith(true)
+  })
 })

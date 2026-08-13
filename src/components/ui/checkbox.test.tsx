@@ -28,6 +28,14 @@ describe('Checkbox', () => {
     expect(onChange).toHaveBeenCalled()
   })
 
+  it('fires onChange when the label is clicked', async () => {
+    const user = userEvent.setup()
+    const onChange = vi.fn()
+    render(<Checkbox label="Show sustainability badge" onChange={onChange} />)
+    await user.click(screen.getByText('Show sustainability badge'))
+    expect(onChange).toHaveBeenCalled()
+  })
+
   it('fires onChange when unchecked', async () => {
     const user = userEvent.setup()
     const onChange = vi.fn()

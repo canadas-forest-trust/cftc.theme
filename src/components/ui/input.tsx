@@ -6,11 +6,11 @@ import { Eyebrow } from "./eyebrow";
  * error state and an optional monospace eyebrow label.
  */
 export const input = tv({
-  base: "w-full bg-transparent font-body text-ink placeholder:text-muted outline-none transition-colors",
+  base: "w-full bg-transparent font-body text-ink placeholder:text-muted outline-none transition-colors [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:textfield]",
   variants: {
     variant: {
       underline: "border-b-2 border-line-strong focus:border-accent",
-      box: "border border-field bg-panel px-3 focus:border-accent",
+      box: "max-w-[250px] border border-field bg-panel px-3 focus:border-accent",
     },
     size: {
       md: "py-2 text-base",
