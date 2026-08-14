@@ -70,6 +70,20 @@ describe('QuizCard', () => {
     expect(onAnswer).toHaveBeenCalledOnce()
   })
 
+  it('renders inverse tone idle answers without ink panel fill', () => {
+    render(<QuizCard question="Question?" answers={ANSWERS} tone="inverse" />)
+    expect(screen.getByRole('button', { name: 'Answer A' }).className).toContain('bg-transparent')
+    expect(screen.getByRole('button', { name: 'Answer A' }).className).toContain('text-inverse')
+  })
+
+  it('still reveals correct answer under inverse tone', async () => {
+    const user = userEvent.setup()
+    render(<QuizCard question="Question?" answers={ANSWERS} tone="inverse" />)
+    await user.click(screen.getByRole('button', { name: 'Answer A' }))
+    expect(screen.getByRole('button', { name: 'Answer B' }).className).toContain('border-accent')
+    expect(screen.getByRole('button', { name: 'Answer A' }).className).toContain('border-danger')
+  })
+
   it('has no a11y violations', async () => {
     const { container } = render(<QuizCard question="A quiz question?" answers={ANSWERS} />)
     expect(await axe(container)).toHaveNoViolations()
