@@ -108,10 +108,16 @@
     border-radius: var(--radius-md);
   }
 
-  /* Keep short form controls from stretching across long admin layouts. */
-  [data-app="admin"] input:not([type="checkbox"]):not([type="radio"]):not([type="color"]):not([type="file"]):not([type="hidden"]):not([type="range"]):not([type="submit"]):not([type="button"]),
+  /* Keep short form controls from stretching across long admin layouts.
+   * Readonly inputs (CopyField share URLs) must span the row. */
+  [data-app="admin"] input:not([type="checkbox"]):not([type="radio"]):not([type="color"]):not([type="file"]):not([type="hidden"]):not([type="range"]):not([type="submit"]):not([type="button"]):not([readonly]),
   [data-app="admin"] select {
     max-width: 250px;
+  }
+
+  [data-app="admin"] [data-copy-field] input,
+  [data-app="admin"] [data-copy-field] button {
+    border-radius: 0;
   }
 
   [data-app="admin"] [data-list-row] {

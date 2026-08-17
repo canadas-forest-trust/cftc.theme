@@ -34,4 +34,10 @@ describe('CopyField', () => {
     const input = container.querySelector('input')
     expect(input).toHaveAttribute('readonly')
   })
+
+  it('marks the share row so admin layout can leave it full width', () => {
+    const { container } = render(<CopyField value="https://example.com/long-path" />)
+    expect(container.querySelector('[data-copy-field]')).toBeInTheDocument()
+    expect(container.querySelector('input')).toHaveClass('max-w-none')
+  })
 })

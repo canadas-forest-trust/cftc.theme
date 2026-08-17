@@ -34,7 +34,7 @@ export function CopyField({ value, label, multiline, className }: CopyFieldProps
   );
 
   return (
-    <div className={["flex flex-col gap-2", className ?? ""].join(" ")}>
+    <div data-copy-field className={["flex flex-col gap-2", className ?? ""].join(" ")}>
       {label && <Eyebrow as="div">{label}</Eyebrow>}
       {multiline ? (
         <div className="flex flex-col gap-2">
@@ -44,11 +44,11 @@ export function CopyField({ value, label, multiline, className }: CopyFieldProps
           <div className="self-start">{btn}</div>
         </div>
       ) : (
-        <div className="flex items-stretch border border-field bg-panel">
+        <div className="flex w-full items-stretch overflow-hidden border border-field bg-panel">
           <input
             readOnly
             value={value}
-            className="min-w-0 flex-1 bg-transparent px-3 py-2 font-eyebrow text-sm text-ink-soft outline-none"
+            className="min-w-0 max-w-none flex-1 bg-transparent px-3 py-2 font-eyebrow text-sm text-ink-soft outline-none"
           />
           {btn}
         </div>
