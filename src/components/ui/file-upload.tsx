@@ -1,4 +1,4 @@
-import { useId } from "react";
+import { useId, type DragEvent } from "react";
 import { cn } from "../../lib/cn";
 import { Eyebrow } from "./eyebrow";
 
@@ -38,6 +38,18 @@ export function FileUpload({
   const generated = useId();
   const inputId = id ?? generated;
 
+  const onDragOver = (e: DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = disabled ? "none" : "copy";
+  };
+
+  const onDrop = (e: DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    if (disabled) return;
+    const files = e.dataTransfer.files;
+    if (files.length) onFileChange(files);
+  };
+
   return (
     <div className={cn("flex flex-col gap-2", className)}>
       <Eyebrow as="label" htmlFor={inputId}>
@@ -45,6 +57,9 @@ export function FileUpload({
       </Eyebrow>
       <label
         htmlFor={inputId}
+        onDragOver={onDragOver}
+        onDragEnter={onDragOver}
+        onDrop={onDrop}
         className={cn(
           "flex min-h-28 cursor-pointer flex-col items-center justify-center gap-1 border border-dashed border-field bg-panel px-4 py-6 text-center transition-colors",
           disabled
