@@ -9,7 +9,7 @@ export interface AdminSectionProps {
   /** Optional count badge next to the title. */
   count?: number;
   /** Optional supporting line under the title. */
-  description?: string;
+  description?: React.ReactNode;
   /** Trailing action (e.g. "View all →" link). */
   action?: React.ReactNode;
   children?: React.ReactNode;
@@ -38,10 +38,14 @@ export function AdminSection({
             </Heading>
             {count != null ? <Badge variant="soft">{count}</Badge> : null}
           </div>
-          {description ? (
-            <Text as="p" size="sm" tone="muted">
-              {description}
-            </Text>
+          {description != null && description !== "" ? (
+            typeof description === "string" ? (
+              <Text as="p" size="sm" tone="muted">
+                {description}
+              </Text>
+            ) : (
+              <div className="text-sm text-muted">{description}</div>
+            )
           ) : null}
         </div>
         {action ? <div className="shrink-0">{action}</div> : null}

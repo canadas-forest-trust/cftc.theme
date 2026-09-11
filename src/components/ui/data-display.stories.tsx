@@ -33,13 +33,32 @@ export const Progress: Story = {
 
 export const Badges: Story = {
   render: () => (
-    <div className="flex flex-wrap items-center gap-4">
-      <Badge variant="outline">Administrator</Badge>
-      <Badge variant="solid">Graphics</Badge>
-      <Badge variant="solid">Copy</Badge>
-      <Badge variant="soft" dot>
-        Test data disabled
-      </Badge>
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-wrap items-center gap-4">
+        <Badge variant="outline">Administrator</Badge>
+        <Badge variant="solid">Graphics</Badge>
+        <Badge variant="solid">Copy</Badge>
+        <Badge variant="soft" dot>
+          Test data disabled
+        </Badge>
+      </div>
+      <div className="flex flex-wrap items-center gap-4">
+        <Badge variant="soft" tone="success">
+          Published
+        </Badge>
+        <Badge variant="soft" tone="warning">
+          Due soon
+        </Badge>
+        <Badge variant="soft" tone="danger">
+          Overdue
+        </Badge>
+        <Badge variant="soft" tone="info">
+          In review
+        </Badge>
+        <Badge variant="soft" tone="neutral">
+          Draft
+        </Badge>
+      </div>
     </div>
   ),
 };

@@ -1,4 +1,5 @@
 import { cn } from "../../lib/cn";
+import { Eyebrow } from "./eyebrow";
 import { Heading } from "./heading";
 import { Text } from "./text";
 
@@ -7,8 +8,8 @@ export interface PageHeaderProps {
   title: string;
   /** Optional meta above the title, e.g. "Staff · Platform". */
   eyebrow?: string;
-  /** Short supporting line under the title. */
-  description?: string;
+  /** Short supporting line under the title (string or rich nodes with links). */
+  description?: React.ReactNode;
   /** Trailing actions (buttons, links). */
   action?: React.ReactNode;
   className?: string;
@@ -31,20 +32,28 @@ export function PageHeader({
     >
       <div className="flex min-w-0 flex-col gap-1">
         {eyebrow ? (
-          <Text as="div" size="sm" tone="muted">
+          <Eyebrow as="div" tone="muted">
             {eyebrow}
-          </Text>
+          </Eyebrow>
         ) : null}
         <Heading as="h1" size="lg">
           {title}
         </Heading>
-        {description ? (
-          <Text as="p" size="sm" tone="muted">
-            {description}
-          </Text>
+        {description != null && description !== "" ? (
+          typeof description === "string" ? (
+            <Text as="p" size="sm" tone="muted">
+              {description}
+            </Text>
+          ) : (
+            <div className="text-sm text-muted">{description}</div>
+          )
         ) : null}
       </div>
-      {action ? <div className="w-full shrink-0 sm:w-auto">{action}</div> : null}
+      {action ? (
+        <div className="flex w-full shrink-0 flex-wrap items-center gap-2 sm:w-auto">
+          {action}
+        </div>
+      ) : null}
     </header>
   );
 }

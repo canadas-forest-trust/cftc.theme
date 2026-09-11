@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { Alert } from "./alert";
+import { EmptyState } from "./empty-state";
 import { Modal } from "./modal";
 import { Button } from "./button";
+import { Panel } from "./panel";
 import { Text } from "./text";
 
 const meta: Meta = { title: "Components/Feedback" };
@@ -23,6 +25,22 @@ export const Alerts: Story = {
         The card was declined. Try a different payment method.
       </Alert>
     </div>
+  ),
+};
+
+export const Empty: Story = {
+  render: () => (
+    <Panel padding="none" className="max-w-lg overflow-hidden">
+      <EmptyState
+        title="No forests yet"
+        body="Forests appear here when partners are onboarded."
+        action={
+          <Button type="button" variant="ghost" size="sm">
+            Reset view
+          </Button>
+        }
+      />
+    </Panel>
   ),
 };
 

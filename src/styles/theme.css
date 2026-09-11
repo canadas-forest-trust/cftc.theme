@@ -47,9 +47,17 @@
 
   /* Status */
   --color-success: var(--color-status-success);
+  --color-success-bg: var(--color-status-success-bg);
+  --color-success-fg: var(--color-status-success-fg);
   --color-warning: var(--color-status-warning);
   --color-warning-bg: var(--color-status-warning-bg);
+  --color-warning-fg: var(--color-status-warning-fg);
   --color-danger: var(--color-status-danger);
+  --color-danger-bg: var(--color-status-danger-bg);
+  --color-danger-fg: var(--color-status-danger-fg);
+  --color-info: var(--color-status-info);
+  --color-info-bg: var(--color-status-info-bg);
+  --color-info-fg: var(--color-status-info-fg);
   --color-gold: var(--color-status-gold);
 
   /* Elevation -> shadow-sm/md/lg */

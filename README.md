@@ -72,8 +72,8 @@ Admin uses **IBM Plex Sans** + **IBM Plex Mono** (paired ops UI). Portal keeps
 
 **Typography** — `Eyebrow` · `Label` · `Display` · `Heading` · `Text`
 **Forms** — `Button` · `Input` (underline/box + error) · `Textarea` · `Select` · `Checkbox` · `Radio` · `Switch` · `ColorField` · `FileUpload` · `Slider` · `OtpInput` · `CopyField`
-**Layout & feedback** — `Panel` · `Divider` · `SectionHeader` · `PageHeader` · `AdminSection` · `WorkQueue` · `StatStrip` · `Alert` · `Modal` · `SegmentedControl` · `Pagination` · `Accordion` · `TopBar` · `Footer`
-**Data & media** — `Stat` · `ProgressBar` · `DataList` · `DataListLink` · `DistributionBar` · `Legend` · `Badge` · `Ribbon` · `MediaCard` · `ArticleCard` · `SdgCard` · `QuizCard` · `CategoryCard` · `SpeciesGrid` · `Avatar` · `Skeleton`
+**Layout & feedback** — `Panel` · `Divider` · `SectionHeader` · `PageHeader` · `AdminSection` · `WorkQueue` · `StatStrip` · `Alert` · `EmptyState` · `Modal` · `SegmentedControl` · `Pagination` · `Accordion` · `TopBar` · `Footer`
+**Data & media** — `Stat` · `ProgressBar` · `DataList` · `DataListLink` · `DistributionBar` · `Legend` · `Badge` (soft + status tones) · `Ribbon` · `MediaCard` · `ArticleCard` · `SdgCard` · `QuizCard` · `CategoryCard` · `SpeciesGrid` · `Avatar` · `Skeleton`
 
 `DataList` is framed by default; rows are focusable `div`s (not nested `<button>`s) so entity cells can use `DataListLink` (`as={Link}` for Next) without invalid HTML. Prefer `DataListLink` over plain text for admin entity names that navigate.
 

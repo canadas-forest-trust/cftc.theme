@@ -24,6 +24,39 @@ describe('Badge', () => {
     expect(screen.getByText('Soft')).toBeInTheDocument()
   })
 
+  it('applies soft status tones', () => {
+    const { container } = render(
+      <Badge variant="soft" tone="success">
+        Published
+      </Badge>,
+    )
+    expect(container.firstChild).toHaveClass('bg-success-bg')
+    expect(container.firstChild).toHaveClass('text-success-fg')
+  })
+
+  it('applies warning, danger, and info soft tones', () => {
+    const { rerender, container } = render(
+      <Badge variant="soft" tone="warning">
+        Due
+      </Badge>,
+    )
+    expect(container.firstChild).toHaveClass('bg-warning-bg')
+
+    rerender(
+      <Badge variant="soft" tone="danger">
+        Overdue
+      </Badge>,
+    )
+    expect(container.firstChild).toHaveClass('bg-danger-bg')
+
+    rerender(
+      <Badge variant="soft" tone="info">
+        Info
+      </Badge>,
+    )
+    expect(container.firstChild).toHaveClass('bg-info-bg')
+  })
+
   it('renders a dot when dot prop is true', () => {
     const { container } = render(<Badge dot>Active</Badge>)
     // The dot span is rendered with aria-hidden, find it by its style

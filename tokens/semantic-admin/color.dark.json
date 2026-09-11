@@ -30,9 +30,17 @@
     },
     "status": {
       "success": { "$value": "#4FB783" },
+      "success-bg": { "$value": "#20301f" },
+      "success-fg": { "$value": "#8FD3AD" },
       "warning": { "$value": "#C98A4A" },
       "warning-bg": { "$value": "#3a2f1c" },
+      "warning-fg": { "$value": "#E6C58A" },
       "danger": { "$value": "#D0685A" },
+      "danger-bg": { "$value": "#3a241c" },
+      "danger-fg": { "$value": "#E8A090" },
+      "info": { "$value": "#7BA3B8" },
+      "info-bg": { "$value": "#1c2a33" },
+      "info-fg": { "$value": "#A8C5D4" },
       "gold": { "$value": "#C98A4A" }
     },
     "green": {
