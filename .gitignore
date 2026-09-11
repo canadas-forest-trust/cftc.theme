@@ -12,3 +12,6 @@ storybook-static/
 .DS_Store
 *.log
 *.tsbuildinfo
+
+# git worktrees (local isolation)
+.worktrees/
