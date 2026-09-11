@@ -16,6 +16,24 @@ describe("PageHeader", () => {
     expect(screen.getByText("What needs attention")).toBeInTheDocument();
   });
 
+  it("renders ReactNode description with links", () => {
+    render(
+      <PageHeader
+        title="Smart Forests"
+        eyebrow="Staff · Smart Forests"
+        description={
+          <>
+            Open <a href="/admin/projects">Projects</a> for planting sites.
+          </>
+        }
+      />,
+    );
+    expect(screen.getByRole("link", { name: "Projects" })).toHaveAttribute(
+      "href",
+      "/admin/projects",
+    );
+  });
+
   it("renders an action", () => {
     render(<PageHeader title="Home" action={<button type="button">Refresh</button>} />);
     expect(screen.getByRole("button", { name: "Refresh" })).toBeInTheDocument();
