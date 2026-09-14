@@ -4,6 +4,7 @@ const ARROWS = { right: "→", down: "↓", none: "" } as const;
 
 /**
  * Button — square-cornered, token-driven. `solid` is the green action button;
+ * `ghost` is the outlined secondary control (Cancel, quiet actions);
  * `link` is the monospace uppercase inline action ("RESEND CODE →", "DOWNLOAD ↓").
  */
 export const button = tv({
@@ -12,7 +13,7 @@ export const button = tv({
     variant: {
       solid: "bg-accent text-accent-fg font-body font-medium hover:bg-accent-strong",
       ghost:
-        "bg-transparent text-ink font-body font-medium border border-hairline hover:border-line-strong",
+        "bg-transparent text-ink font-body font-medium border border-field hover:border-line-strong hover:bg-inset",
       link: "bg-transparent text-accent font-eyebrow uppercase tracking-wide text-xs hover:text-accent-strong p-0 h-auto",
     },
     size: {

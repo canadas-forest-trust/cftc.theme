@@ -30,7 +30,9 @@ describe('Button', () => {
 
   it('renders with variant ghost', () => {
     render(<Button variant="ghost">Ghost</Button>)
-    expect(screen.getByRole('button', { name: 'Ghost' })).toBeInTheDocument()
+    const btn = screen.getByRole('button', { name: 'Ghost' })
+    expect(btn).toBeInTheDocument()
+    expect(btn.className).toContain('border-field')
   })
 
   it('renders with variant link', () => {
