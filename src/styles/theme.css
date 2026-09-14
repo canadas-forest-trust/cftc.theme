@@ -119,3 +119,61 @@
     cursor: pointer;
   }
 }
+
+/* Modal enter / exit — used by Modal (data-state open|closed) */
+@keyframes cft-modal-backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes cft-modal-backdrop-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes cft-modal-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes cft-modal-panel-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(6px) scale(0.985);
+  }
+}
+
+.cft-modal-backdrop[data-state="open"] {
+  animation: cft-modal-backdrop-in 180ms ease-out both;
+}
+.cft-modal-backdrop[data-state="closed"] {
+  animation: cft-modal-backdrop-out 160ms ease-in both;
+}
+.cft-modal-panel[data-state="open"] {
+  animation: cft-modal-panel-in 180ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.cft-modal-panel[data-state="closed"] {
+  animation: cft-modal-panel-out 160ms ease-in both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cft-modal-backdrop[data-state],
+  .cft-modal-panel[data-state] {
+    animation: none;
+  }
+}

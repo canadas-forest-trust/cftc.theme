@@ -64,9 +64,9 @@ describe('Modal', () => {
     expect(screen.getByRole('dialog')).toHaveAttribute('aria-modal', 'true')
   })
 
-  it('defaults to max-w-2xl (size lg)', () => {
+  it('defaults to max-w-xl (size lg)', () => {
     render(<Modal open={true} onClose={vi.fn()} title="Title">Content</Modal>)
-    expect(screen.getByRole('dialog').className).toContain('max-w-2xl')
+    expect(screen.getByRole('dialog').className).toContain('max-w-xl')
   })
 
   it('applies size md as max-w-lg', () => {
@@ -76,6 +76,15 @@ describe('Modal', () => {
       </Modal>,
     )
     expect(screen.getByRole('dialog').className).toContain('max-w-lg')
+  })
+
+  it('applies size xl as max-w-2xl', () => {
+    render(
+      <Modal open={true} onClose={vi.fn()} title="Title" size="xl">
+        Content
+      </Modal>,
+    )
+    expect(screen.getByRole('dialog').className).toContain('max-w-2xl')
   })
 
   it('has no a11y violations', async () => {

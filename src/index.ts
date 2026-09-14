@@ -33,7 +33,12 @@ export { WorkQueue, type WorkQueueProps } from "./components/ui/work-queue";
 export { StatStrip, type StatStripProps } from "./components/ui/stat-strip";
 export { Alert, alert, type AlertProps } from "./components/ui/alert";
 export { EmptyState, type EmptyStateProps } from "./components/ui/empty-state";
-export { Modal, type ModalProps, type ModalSize } from "./components/ui/modal";
+export {
+  Modal,
+  MODAL_MOTION_MS,
+  type ModalProps,
+  type ModalSize,
+} from "./components/ui/modal";
 export {
   Toaster,
   toast,
