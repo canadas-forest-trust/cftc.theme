@@ -1,4 +1,13 @@
-import { useEffect, useId, useRef, useState, type ReactNode, type RefObject } from "react";
+import {
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ReactNode,
+  type RefObject,
+} from "react";
+import { createPortal } from "react-dom";
 import { cn } from "../../lib/cn";
 import {
   WEEKDAY_LABELS,
@@ -10,6 +19,9 @@ import {
   todayIsoDate,
   toIsoDate,
 } from "../../lib/iso-date";
+
+/** Above Modal (z-50) so calendars work inside dialogs and overflow panels. */
+const POPOVER_Z = "z-[100]";
 
 export interface CalendarMonthProps {
   /** Visible month (1–12 calendar month via year + monthIndex). */
@@ -161,10 +173,42 @@ export interface DatePopoverProps {
   children: ReactNode;
 }
 
-/** Anchored popover with outside-click + Escape close. */
+type PopoverCoords = { top: number; left: number };
+
+function measureAnchor(anchor: HTMLElement | null): PopoverCoords | null {
+  if (!anchor) return null;
+  const rect = anchor.getBoundingClientRect();
+  return { top: rect.bottom + 6, left: rect.left };
+}
+
+/** Anchored popover portaled to `document.body` so it escapes overflow/stacking. */
 export function DatePopover({ open, onOpenChange, anchorRef, children }: DatePopoverProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const panelId = useId();
+  const [coords, setCoords] = useState<PopoverCoords | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!open) {
+      setCoords(null);
+      return;
+    }
+    function update() {
+      setCoords(measureAnchor(anchorRef.current));
+    }
+    update();
+    window.addEventListener("resize", update);
+    // Capture scroll from any scrollable ancestor.
+    window.addEventListener("scroll", update, true);
+    return () => {
+      window.removeEventListener("resize", update);
+      window.removeEventListener("scroll", update, true);
+    };
+  }, [open, anchorRef]);
 
   useEffect(() => {
     if (!open) return;
@@ -185,18 +229,23 @@ export function DatePopover({ open, onOpenChange, anchorRef, children }: DatePop
     };
   }, [open, onOpenChange, anchorRef]);
 
-  if (!open) return null;
+  if (!open || !mounted || !coords) return null;
 
-  return (
+  return createPortal(
     <div
       id={panelId}
       ref={panelRef}
       role="dialog"
       aria-modal="false"
-      className="absolute left-0 top-[calc(100%+0.35rem)] z-50 border border-field bg-panel shadow-[0_8px_24px_rgba(0,0,0,0.08)]"
+      style={{ top: coords.top, left: coords.left }}
+      className={cn(
+        "fixed border border-field bg-panel shadow-[0_8px_24px_rgba(0,0,0,0.08)]",
+        POPOVER_Z,
+      )}
     >
       {children}
-    </div>
+    </div>,
+    document.body,
   );
 }
 
