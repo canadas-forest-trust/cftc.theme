@@ -13,7 +13,7 @@ describe("DateTimeField", () => {
     );
   });
 
-  it("updates when a day is chosen", async () => {
+  it("commits on Accept after picking a day", async () => {
     const user = userEvent.setup();
     const onChange = vi.fn();
     render(
@@ -21,6 +21,8 @@ describe("DateTimeField", () => {
     );
     await user.click(screen.getByRole("button", { name: "Starts" }));
     await user.click(screen.getByRole("button", { name: "2026-09-20" }));
+    expect(onChange).not.toHaveBeenCalled();
+    await user.click(screen.getByRole("button", { name: /accept/i }));
     expect(onChange).toHaveBeenCalledWith("2026-09-20T14:30");
   });
 });

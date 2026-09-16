@@ -1,9 +1,12 @@
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { cn } from "../../lib/cn";
 import { formatIsoDateDisplay, parseIsoDate } from "../../lib/iso-date";
 import { Eyebrow } from "./eyebrow";
 import { CalendarMonth, DatePopover, useCalendarMonth } from "./calendar-month";
 import { input } from "./input";
+
+const ACTION_BTN =
+  "font-eyebrow text-xs uppercase tracking-wide transition-colors";
 
 export interface DateFieldProps {
   label?: string;
@@ -18,7 +21,7 @@ export interface DateFieldProps {
   error?: string;
   className?: string;
   id?: string;
-  /** Show a clear control when a value is set. Defaults to true. */
+  /** Show a clear control when a draft value is set. Defaults to true. */
   clearable?: boolean;
   variant?: "box" | "underline";
   size?: "md" | "lg";
@@ -28,7 +31,7 @@ export interface DateFieldProps {
 
 /**
  * DateField — popover month calendar that stores ISO dates (`YYYY-MM-DD`).
- * Drop-in replacement for native `<input type="date">` with friendlier UX.
+ * Day clicks update a draft; Accept commits, Cancel discards.
  */
 export function DateField({
   label,
@@ -50,13 +53,23 @@ export function DateField({
   const generated = useId();
   const inputId = id ?? generated;
   const [open, setOpen] = useState(false);
+  const [draft, setDraft] = useState(value);
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const { year, monthIndex, setYearMonth } = useCalendarMonth(value || undefined);
+  const { year, monthIndex, setYearMonth } = useCalendarMonth(draft || undefined);
   const isInvalid = Boolean(error);
   const display = value && parseIsoDate(value) ? formatIsoDateDisplay(value) : "";
 
-  function closeWith(next: string) {
-    onChange(next);
+  useEffect(() => {
+    if (open) setDraft(value);
+  }, [open, value]);
+
+  function accept() {
+    onChange(draft);
+    setOpen(false);
+  }
+
+  function cancel() {
+    setDraft(value);
     setOpen(false);
   }
 
@@ -90,25 +103,43 @@ export function DateField({
         </span>
       </button>
 
-      <DatePopover open={open} onOpenChange={setOpen} anchorRef={triggerRef}>
+      <DatePopover open={open} onOpenChange={(next) => (next ? setOpen(true) : cancel())} anchorRef={triggerRef}>
         <CalendarMonth
           year={year}
           monthIndex={monthIndex}
           onYearMonthChange={setYearMonth}
-          selected={value || undefined}
+          selected={draft || undefined}
           min={min}
           max={max}
-          onSelect={closeWith}
+          onSelect={setDraft}
           footer={
-            clearable && value ? (
-              <button
-                type="button"
-                className="ml-auto font-eyebrow text-xs uppercase tracking-wide text-muted hover:text-ink"
-                onClick={() => closeWith("")}
-              >
-                Clear
-              </button>
-            ) : null
+            <>
+              {clearable && draft ? (
+                <button
+                  type="button"
+                  className={cn(ACTION_BTN, "text-muted hover:text-ink")}
+                  onClick={() => setDraft("")}
+                >
+                  Clear
+                </button>
+              ) : null}
+              <div className="ml-auto flex basis-full items-center justify-end gap-3 border-t border-hairline pt-2">
+                <button
+                  type="button"
+                  className={cn(ACTION_BTN, "text-muted hover:text-ink")}
+                  onClick={cancel}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  className={cn(ACTION_BTN, "text-accent hover:text-accent-strong")}
+                  onClick={accept}
+                >
+                  Accept
+                </button>
+              </div>
+            </>
           }
         />
       </DatePopover>

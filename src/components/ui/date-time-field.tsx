@@ -1,4 +1,4 @@
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { cn } from "../../lib/cn";
 import {
   formatIsoDateTimeDisplay,
@@ -13,6 +13,8 @@ import { input } from "./input";
 const DEFAULT_HOUR = "09";
 const TIME_SELECT_CLASS =
   "border border-field bg-panel px-1.5 py-1 font-body text-sm text-ink";
+const ACTION_BTN =
+  "font-eyebrow text-xs uppercase tracking-wide transition-colors";
 const HOUR_OPTIONS = Array.from({ length: 24 }, (_, hour) =>
   String(hour).padStart(2, "0"),
 );
@@ -54,7 +56,7 @@ function nearestMinuteOption(minute: string | undefined, options: string[]): str
 
 /**
  * DateTimeField — calendar + time controls replacing native `datetime-local`.
- * Value shape matches `<input type="datetime-local">` (`YYYY-MM-DDTHH:mm`).
+ * Edits stay in draft until Accept; Cancel discards.
  */
 export function DateTimeField({
   label,
@@ -77,8 +79,9 @@ export function DateTimeField({
   const generated = useId();
   const inputId = id ?? generated;
   const [open, setOpen] = useState(false);
+  const [draft, setDraft] = useState(value);
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const parts = splitDateTimeLocal(value);
+  const parts = splitDateTimeLocal(draft);
   const { year, monthIndex, setYearMonth } = useCalendarMonth(parts.date || undefined);
   const isInvalid = Boolean(error);
   const display =
@@ -89,18 +92,28 @@ export function DateTimeField({
   const selectedHour = hour || DEFAULT_HOUR;
   const selectedMinute = nearestMinuteOption(minute, minuteOptions);
   const selectedTime = `${selectedHour}:${selectedMinute}`;
-  const activeDate = parts.date || value.slice(0, 10);
-  const timeControlsEnabled = Boolean(parts.date || value);
+  const activeDate = parts.date || draft.slice(0, 10);
+  const timeControlsEnabled = Boolean(parts.date || draft);
 
-  function apply(date: string, time: string) {
+  useEffect(() => {
+    if (open) setDraft(value);
+  }, [open, value]);
+
+  function applyDraft(date: string, time: string) {
     if (!date) {
-      onChange("");
+      setDraft("");
       return;
     }
-    onChange(joinDateTimeLocal(date, time));
+    setDraft(joinDateTimeLocal(date, time));
   }
 
-  function close() {
+  function accept() {
+    onChange(draft);
+    setOpen(false);
+  }
+
+  function cancel() {
+    setDraft(value);
     setOpen(false);
   }
 
@@ -134,7 +147,7 @@ export function DateTimeField({
         </span>
       </button>
 
-      <DatePopover open={open} onOpenChange={setOpen} anchorRef={triggerRef}>
+      <DatePopover open={open} onOpenChange={(next) => (next ? setOpen(true) : cancel())} anchorRef={triggerRef}>
         <CalendarMonth
           year={year}
           monthIndex={monthIndex}
@@ -142,7 +155,7 @@ export function DateTimeField({
           selected={parts.date || undefined}
           min={min?.slice(0, 10)}
           max={max?.slice(0, 10)}
-          onSelect={(iso) => apply(iso, selectedTime)}
+          onSelect={(iso) => applyDraft(iso, selectedTime)}
           footer={
             <>
               <div className="flex items-center gap-1">
@@ -154,7 +167,7 @@ export function DateTimeField({
                   className={TIME_SELECT_CLASS}
                   value={selectedHour}
                   onChange={(event) =>
-                    apply(activeDate, `${event.target.value}:${selectedMinute}`)
+                    applyDraft(activeDate, `${event.target.value}:${selectedMinute}`)
                   }
                   disabled={!timeControlsEnabled}
                 >
@@ -173,7 +186,7 @@ export function DateTimeField({
                   className={TIME_SELECT_CLASS}
                   value={selectedMinute}
                   onChange={(event) =>
-                    apply(activeDate, `${selectedHour}:${event.target.value}`)
+                    applyDraft(activeDate, `${selectedHour}:${event.target.value}`)
                   }
                   disabled={!timeControlsEnabled}
                 >
@@ -184,27 +197,31 @@ export function DateTimeField({
                   ))}
                 </select>
               </div>
-              {clearable && value ? (
+              {clearable && draft ? (
                 <button
                   type="button"
-                  className="ml-auto font-eyebrow text-xs uppercase tracking-wide text-muted hover:text-ink"
-                  onClick={() => {
-                    onChange("");
-                    close();
-                  }}
+                  className={cn(ACTION_BTN, "text-muted hover:text-ink")}
+                  onClick={() => setDraft("")}
                 >
                   Clear
                 </button>
-              ) : (
+              ) : null}
+              <div className="ml-auto flex basis-full items-center justify-end gap-3 border-t border-hairline pt-2">
                 <button
                   type="button"
-                  className="ml-auto font-eyebrow text-xs uppercase tracking-wide text-accent hover:text-accent-strong"
-                  onClick={close}
-                  disabled={!value}
+                  className={cn(ACTION_BTN, "text-muted hover:text-ink")}
+                  onClick={cancel}
                 >
-                  Done
+                  Cancel
                 </button>
-              )}
+                <button
+                  type="button"
+                  className={cn(ACTION_BTN, "text-accent hover:text-accent-strong")}
+                  onClick={accept}
+                >
+                  Accept
+                </button>
+              </div>
             </>
           }
         />
